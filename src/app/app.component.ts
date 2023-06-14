@@ -11,12 +11,17 @@ export class AppComponent {
   notes: string[] = [];
 
   addNewNote() {
+    if (this.inputValue.length === 0) return;
     this.notes.push(this.inputValue);
     this.inputValue = '';
   }
 
-  onUpdateInput(event: Event) {
-    this.inputValue = (<HTMLInputElement>event.target).value;
+  evaluateInput() {
     this.inputContainsSomething = Boolean(this.inputValue.length > 0);
   }
+
+  // onUpdateInput(event: Event) {
+  //   this.inputValue = (<HTMLInputElement>event.target).value;
+  //   this.inputContainsSomething = Boolean(this.inputValue.length > 0);
+  // }
 }

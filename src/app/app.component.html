@@ -1,6 +1,15 @@
 <div class="input">
-  <input type="text" (input)="onUpdateInput($event)" />
-  <!-- <input type="text" [(ngModel)]="inputValue" /> -->
+  <input
+    type="text"
+    [(ngModel)]="inputValue"
+    (keyup.enter)="addNewNote()"
+    (input)="evaluateInput()"
+  />
+  <!-- <input
+    type="text"
+    (input)="onUpdateInput($event)"
+    (keyup.enter)="addNewNote()"
+  /> -->
   <button [disabled]="!inputContainsSomething" (click)="addNewNote()">
     Add note
   </button>
