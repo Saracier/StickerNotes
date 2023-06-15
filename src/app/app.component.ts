@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { DeletedNotesService } from './services/deleted-notes.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,10 @@ export class AppComponent {
   @ViewChild('titleInputValue', { static: true })
   titleInputValue: ElementRef<HTMLInputElement>;
   inputContainsSomething = false;
-  notes: { id: number; title: string; text: string }[] = [];
+  notes: { id: number; title: string; text: string }[] = [...exampleNotesArray];
   counter: number = 1;
+
+  constructor(private deletedNotes: DeletedNotesService) {}
 
   addNewNote() {
     if (
@@ -42,7 +45,7 @@ export class AppComponent {
       throw new Error(
         'something went wrong. Index of note for delete exeeded array'
       );
-    this.notes.splice(numberInArray, 1);
+    this.deletedNotes.catchOldNote(this.notes.splice(numberInArray, 1));
   }
 
   // onUpdateInput(event: Event) {
@@ -50,3 +53,9 @@ export class AppComponent {
   //   this.inputContainsSomething = Boolean(this.textInputValue.length > 0);
   // }
 }
+
+const exampleNotesArray = [
+  { id: 456456, title: 'Hello World', text: 'Hello from the other site' },
+  { id: 23423424, title: 'Hello Giedi Prime', text: 'I love Dune books' },
+  { id: 6363688, title: 'Hello There', text: 'General Kenobi' },
+];
