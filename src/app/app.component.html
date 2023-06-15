@@ -1,8 +1,18 @@
 <div class="input">
+  <label for="title">tytuł</label>
   <input
+    name="title"
     type="text"
-    [(ngModel)]="inputValue"
-    (keyup.enter)="addNewNote()"
+    (keyup.enter)="addNewNote(titleInputValue)"
+    (input)="evaluateInput()"
+    #titleInputValue
+  />
+  <label for="text">tekst</label>
+  <input
+    name="text"
+    type="text"
+    [(ngModel)]="textInputValue"
+    (keyup.enter)="addNewNote(titleInputValue)"
     (input)="evaluateInput()"
   />
   <!-- <input
@@ -10,16 +20,28 @@
     (input)="onUpdateInput($event)"
     (keyup.enter)="addNewNote()"
   /> -->
-  <button [disabled]="!inputContainsSomething" (click)="addNewNote()">
+  <button
+    [disabled]="!inputContainsSomething"
+    (click)="addNewNote(titleInputValue)"
+  >
     Add note
   </button>
+
+  <!--
+zrobićdrugie pole title za pomoca referencji (wyklad 73)
+zamienić powyższe na viewchild
+ngcontent dać jako index
+ -->
+  <!-- https://i.pinimg.com/originals/0d/c8/80/0dc8807679a4c53e79ca35c4d5356e94.jpg
+ https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1J1cW3h74b_XcC5XqEhUVu0xgdF1_5tJe9Q&usqp=CAU -->
 </div>
 <hr />
 <div *ngIf="!(notes[0] === undefined); else nothingToShow">
-  <div *ngFor="let note of notes; let i = index" class="notes">
-    <div class="note">
-      <p>{{ i + 1 }}# {{ note }}</p>
-    </div>
+  <div *ngFor="let singleNote of notes; let i = index" class="notes">
+    <app-note
+      [note]="singleNote"
+      (deleteNote)="onDeleteSingleNote($event)"
+    ></app-note>
   </div>
 </div>
 <ng-template #nothingToShow>
