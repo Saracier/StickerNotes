@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,17 +7,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   textInputValue = '';
-  // titleInputValue = '';
+  @ViewChild('titleInputValue', { static: true })
+  titleInputValue: ElementRef<HTMLInputElement>;
   inputContainsSomething = false;
   notes: { id: number; title: string; text: string }[] = [];
   counter: number = 1;
 
-  addNewNote(titleInputValue: HTMLInputElement) {
-    if (this.textInputValue.length === 0 || titleInputValue.value.length === 0)
+  addNewNote() {
+    if (
+      this.textInputValue.length === 0 ||
+      this.titleInputValue.nativeElement.value.length === 0
+    )
       return;
     this.notes.push({
       id: this.counter,
-      title: titleInputValue.value,
+      title: this.titleInputValue.nativeElement.value,
       text: this.textInputValue,
     });
     this.counter++;
@@ -36,7 +40,7 @@ export class AppComponent {
     });
     if (numberInArray < 0)
       throw new Error(
-        'something went wrong. Note for delete exeeded index of array'
+        'something went wrong. Index of note for delete exeeded array'
       );
     this.notes.splice(numberInArray, 1);
   }

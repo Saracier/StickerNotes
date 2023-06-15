@@ -3,7 +3,7 @@
   <input
     name="title"
     type="text"
-    (keyup.enter)="addNewNote(titleInputValue)"
+    (keyup.enter)="addNewNote()"
     (input)="evaluateInput()"
     #titleInputValue
   />
@@ -12,7 +12,7 @@
     name="text"
     type="text"
     [(ngModel)]="textInputValue"
-    (keyup.enter)="addNewNote(titleInputValue)"
+    (keyup.enter)="addNewNote()"
     (input)="evaluateInput()"
   />
   <!-- <input
@@ -20,17 +20,13 @@
     (input)="onUpdateInput($event)"
     (keyup.enter)="addNewNote()"
   /> -->
-  <button
-    [disabled]="!inputContainsSomething"
-    (click)="addNewNote(titleInputValue)"
-  >
+  <button [disabled]="!inputContainsSomething" (click)="addNewNote()">
     Add note
   </button>
 
   <!--
 
 zamienić powyższe na viewchild
-ngcontent dać jako index
  -->
   <!-- https://i.pinimg.com/originals/0d/c8/80/0dc8807679a4c53e79ca35c4d5356e94.jpg
  https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1J1cW3h74b_XcC5XqEhUVu0xgdF1_5tJe9Q&usqp=CAU -->
