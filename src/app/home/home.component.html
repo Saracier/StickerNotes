@@ -1,0 +1,6 @@
+<button (click)="toggleLoggedIn()">Toggle logged in</button>
+<p>
+  You are <b>{{ isLoggedIn ? "" : "NOT" }} logged in</b>
+</p>
+<button><a [routerLink]="['/allNotes']">Go to yout notes</a></button>
+<router-outlet></router-outlet>
