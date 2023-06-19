@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { DeletedNotesService } from '../services/deleted-notes.service';
+import { NotesDataService } from '../services/notes-data.service';
 
 @Component({
   selector: 'app-all-notes',
@@ -11,10 +12,13 @@ export class AllNotesComponent {
   @ViewChild('titleInputValue', { static: true })
   titleInputValue: ElementRef<HTMLInputElement>;
   inputContainsSomething = false;
-  notes: { id: number; title: string; text: string }[] = [...exampleNotesArray];
   counter: number = 1;
+  notes = this.NotesDataService.notes;
 
-  constructor(private deletedNotes: DeletedNotesService) {}
+  constructor(
+    private deletedNotes: DeletedNotesService,
+    private NotesDataService: NotesDataService
+  ) {}
 
   addNewNote() {
     if (
@@ -22,11 +26,12 @@ export class AllNotesComponent {
       this.titleInputValue.nativeElement.value.length === 0
     )
       return;
-    this.notes.push({
-      id: this.counter,
-      title: this.titleInputValue.nativeElement.value,
-      text: this.textInputValue,
-    });
+    this.NotesDataService.addNewNote(
+      this.counter,
+      this.titleInputValue.nativeElement.value,
+      this.textInputValue
+    );
+
     this.counter++;
     this.textInputValue = '';
     // this.titleInputValue = '';
@@ -38,14 +43,16 @@ export class AllNotesComponent {
   }
 
   onDeleteSingleNote(deleteObject: { id: number }) {
-    const numberInArray = this.notes.findIndex((element) => {
-      return element.id === deleteObject.id;
-    });
-    if (numberInArray < 0)
-      throw new Error(
-        'something went wrong. Index of note for delete exeeded array'
-      );
-    this.deletedNotes.catchOldNote(this.notes.splice(numberInArray, 1));
+    this.NotesDataService.onDeleteSingleNote(deleteObject);
+
+    // const numberInArray = this.notes.findIndex((element) => {
+    //   return element.id === deleteObject.id;
+    // });
+    // if (numberInArray < 0)
+    //   throw new Error(
+    //     'something went wrong. Index of note for delete exeeded array'
+    //   );
+    // this.deletedNotes.catchOldNote(this.notes.splice(numberInArray, 1));
   }
 
   // onUpdateInput(event: Event) {
@@ -53,9 +60,3 @@ export class AllNotesComponent {
   //   this.inputContainsSomething = Boolean(this.textInputValue.length > 0);
   // }
 }
-
-const exampleNotesArray = [
-  { id: 456456, title: 'Hello World', text: 'Hello from the other site' },
-  { id: 23423424, title: 'Hello Giedi Prime', text: 'I love Dune books' },
-  { id: 6363688, title: 'Hello There', text: 'General Kenobi' },
-];

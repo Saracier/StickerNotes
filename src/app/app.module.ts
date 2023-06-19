@@ -9,6 +9,7 @@ import { FocusDirective } from './note/focus.directive';
 import { HomeComponent } from './home/home.component';
 import { AllNotesComponent } from './all-notes/all-notes.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { EditNoteComponent } from './edit-note/edit-note.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HomeComponent,
     AllNotesComponent,
     NotFoundComponent,
+    EditNoteComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

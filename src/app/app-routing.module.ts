@@ -5,6 +5,7 @@ import { AllNotesComponent } from './all-notes/all-notes.component';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardService } from './auth-guard.service';
+import { EditNoteComponent } from './edit-note/edit-note.component';
 
 const routes: Routes = [
   {
@@ -14,8 +15,14 @@ const routes: Routes = [
     children: [
       {
         path: 'allNotes',
-
         component: AllNotesComponent,
+        children: [
+          {
+            path: 'edit/:id',
+
+            component: EditNoteComponent,
+          },
+        ],
       },
     ],
   },
