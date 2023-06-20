@@ -28,6 +28,7 @@
  https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1J1cW3h74b_XcC5XqEhUVu0xgdF1_5tJe9Q&usqp=CAU -->
 </div>
 <hr />
+<router-outlet></router-outlet>
 <div *ngIf="!(notes[0] === undefined); else nothingToShow">
   <div *ngFor="let singleNote of notes; let i = index" class="notes">
     <app-note [note]="singleNote" (deleteNote)="onDeleteSingleNote($event)">

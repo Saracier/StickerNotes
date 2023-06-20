@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-note',
@@ -12,8 +13,16 @@ export class NoteComponent {
     text: '',
   };
   @Output() deleteNote = new EventEmitter<{ id: number }>();
-  constructor() {}
+  constructor(private router: Router) {}
   deleteHandler() {
     this.deleteNote.emit({ id: this.note.id });
+  }
+
+  goToEditComponent() {
+    this.router.navigate(['/allNotes', 'edit', this.note.id]);
+    // this.router.navigate(['/servers', this.note.id, 'edit'], {
+    //   queryParams: { allowEdit: 1 },
+    //   fragment: 'loading',
+    // });
   }
 }

@@ -23,7 +23,7 @@ export class NotesDataService {
 
   onDeleteSingleNote(deleteObject: { id: number }) {
     const numberInArray = this.notes.findIndex((element) => {
-      return element.id === deleteObject.id;
+      return element.id === Number(deleteObject.id);
     });
     if (numberInArray < 0)
       throw new Error(

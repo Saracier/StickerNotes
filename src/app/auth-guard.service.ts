@@ -13,8 +13,9 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuardService implements CanActivateChild {
   isLoggedIn = false;
-  toggleLoggedIn() {
-    this.isLoggedIn = !this.isLoggedIn;
+
+  toggleLoggedIn(isLoggedIn: boolean) {
+    this.isLoggedIn = !isLoggedIn;
     console.log('loggedIn is ', this.isLoggedIn);
   }
   constructor(private route: Router) {}
@@ -43,6 +44,14 @@ export class AuthGuardService implements CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('loggedIn is in guard', this.isLoggedIn);
+    console.log(
+      'local storage status in guard ',
+      localStorage.getItem('isLoggedIn'),
+      Boolean(localStorage.getItem('isLoggedIn'))
+    );
+    this.isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
+    console.log('loggedIn is in guard', this.isLoggedIn);
     if (this.isLoggedIn) {
       return this.resolveIsAuthenticated();
     }

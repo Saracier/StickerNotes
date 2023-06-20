@@ -1,5 +1,6 @@
 <div class="note" appFocus>
   <p>{{ note.id }}# {{ note.title }} | {{ note.text }}</p>
   <button (click)="deleteHandler()">Delete note</button>
+  <button (click)="goToEditComponent()">Edit this note</button>
 </div>
 <ng-content></ng-content>

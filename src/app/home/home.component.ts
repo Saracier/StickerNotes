@@ -12,8 +12,14 @@ export class HomeComponent {
     this.isLoggedIn = authGuard.isLoggedIn;
   }
 
+  ngOnInit() {
+    this.isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
+  }
+
   toggleLoggedIn() {
-    this.authGuard.toggleLoggedIn();
+    this.authGuard.toggleLoggedIn(this.isLoggedIn);
     this.isLoggedIn = this.authGuard.isLoggedIn;
+    localStorage.setItem('isLoggedIn', this.isLoggedIn ? '1' : '');
+    console.log('loggedIn is ', this.isLoggedIn);
   }
 }
