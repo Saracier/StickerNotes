@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { AllNotesComponent } from './all-notes/all-notes.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { EditNoteComponent } from './edit-note/edit-note.component';
+import { ClockComponent } from './clock/clock.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { EditNoteComponent } from './edit-note/edit-note.component';
     AllNotesComponent,
     NotFoundComponent,
     EditNoteComponent,
+    ClockComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
