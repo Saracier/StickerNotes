@@ -1,1 +1,55 @@
-<p>contact-form-td works!</p>
+<p>This is a form component maked in Template-Driven approach</p>
+<form (ngSubmit)="onSubmit()" #formTDElement="ngForm">
+  <div id="userTicker" ngModelGroup="userSendUsTicket">
+    <!-- ngModelGroup jest po to, żeby w outpucie nam wrzucić
+    wszustko do wartości obiektu tak jak się nazywa ngModelGroup.
+    Można tak ładnie zgrupować dane. -->
+    <label for="username"> Name : </label>
+    <input
+      id="username"
+      type="text"
+      ngModel
+      name="username"
+      minlength="3"
+      required
+    />
+    <div *ngFor="let gender of genders">
+      <label>
+        <input type="radio" name="gender" ngModel [value]="gender" />
+        {{ gender }}
+      </label>
+    </div>
+    <label for="Email"> Email :</label>
+    <input
+      id="Email"
+      type="text"
+      ngModel
+      name="email"
+      required
+      email
+      #emailRef="ngModel"
+    />
+    <span *ngIf="!emailRef.valid && emailRef.touched"
+      >Enter a valid email!</span
+    >
+    <label for="marketing">
+      Do you agree to recieve merketing spam from us? :</label
+    >
+    <select id="marketing" ngModel name="marketing" [ngModel]="defoultAnswer">
+      <option value="yes">Yes</option>
+      <option value="ofc">Of course</option>
+      <option value="fine">Fine</option>
+    </select>
+    <label for="message"> Message :</label>
+    <textarea
+      id="message"
+      type="textarea"
+      ngModel
+      name="message"
+      required
+      [(ngModel)]="messageInput"
+    ></textarea>
+    <p>Your message is {{ messageInput }}</p>
+    <button type="submit" [disabled]="!formTDElement.valid">submit</button>
+  </div>
+</form>

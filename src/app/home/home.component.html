@@ -2,5 +2,9 @@
 <p>
   You are <b>{{ isLoggedIn ? "" : "NOT" }} logged in</b>
 </p>
-<button><a [routerLink]="['/allNotes']">Go to yout notes</a></button>
+<button><a [routerLink]="['/allNotes']">Go to your notes</a></button>
+<button>
+  <a [routerLink]="['/contacttd']">Template-driven contact form</a>
+</button>
+<button><a [routerLink]="['/contactr']">Reactive contact form</a></button>
 <router-outlet></router-outlet>

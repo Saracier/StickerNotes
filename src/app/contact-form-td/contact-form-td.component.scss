@@ -1,0 +1,19 @@
+div {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+
+  button {
+    margin: 20px;
+  }
+}
+
+form input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+textarea {
+  min-width: 100px;
+  max-width: 350px;
+  max-height: 300px;
+}
