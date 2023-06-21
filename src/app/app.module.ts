@@ -11,6 +11,8 @@ import { AllNotesComponent } from './all-notes/all-notes.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { EditNoteComponent } from './edit-note/edit-note.component';
 import { ClockComponent } from './clock/clock.component';
+import { ContactFormTdComponent } from './contact-form-td/contact-form-td.component';
+import { ContactFormRComponent } from './contact-form-r/contact-form-r.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { ClockComponent } from './clock/clock.component';
     NotFoundComponent,
     EditNoteComponent,
     ClockComponent,
+    ContactFormTdComponent,
+    ContactFormRComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

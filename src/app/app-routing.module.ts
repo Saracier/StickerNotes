@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardService } from './auth-guard.service';
 import { EditNoteComponent } from './edit-note/edit-note.component';
+import { ContactFormTdComponent } from './contact-form-td/contact-form-td.component';
+import { ContactFormRComponent } from './contact-form-r/contact-form-r.component';
 
 const routes: Routes = [
   {
@@ -24,6 +26,8 @@ const routes: Routes = [
           },
         ],
       },
+      { path: 'contacttd', component: ContactFormTdComponent },
+      { path: 'contactr', component: ContactFormRComponent },
     ],
   },
   { path: 'not-found', component: NotFoundComponent },
