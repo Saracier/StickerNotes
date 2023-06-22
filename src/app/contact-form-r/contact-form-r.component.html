@@ -1,1 +1,65 @@
-<p>contact-form-r works!</p>
+<p>This is a form component maked in Reactive approach</p>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div id="userTicker">
+    <div formGroupName="userData">
+      <label for="username"> Name : </label>
+      <input
+        id="username"
+        type="text"
+        name="username"
+        formControlName="username"
+      />
+      <span
+        *ngIf="
+          !signupForm.get('userData.username')?.valid &&
+          signupForm.get('userData.username')?.touched
+        "
+        >Please enter a valid username!</span
+      >
+      <div *ngFor="let gender of genders">
+        <label>
+          <input
+            type="radio"
+            name="gender"
+            [value]="gender"
+            formControlName="gender"
+          />
+          {{ gender }}
+        </label>
+      </div>
+      <label for="Email"> Email :</label>
+      <input id="Email" type="text" name="email" formControlName="email" />
+    </div>
+    <span
+      *ngIf="
+        !signupForm.get('email')?.valid && signupForm.get('email')?.touched
+      "
+      >Please enter a valid email!</span
+    >
+    <label for="marketing">
+      Do you agree to recieve merketing spam from us? :</label
+    >
+    <select id="marketing" name="marketing" formControlName="marketing">
+      <option value="yes">Yes</option>
+      <option value="ofc">Of course</option>
+      <option value="fine">Fine</option>
+    </select>
+    <label for="message"> Message :</label>
+    <textarea
+      id="message"
+      type="textarea"
+      name="message"
+      formControlName="message"
+    ></textarea>
+    <span
+      *ngIf="
+        !signupForm.get('message')?.valid && signupForm.get('message')?.touched
+      "
+      >Please enter a valid message!</span
+    >
+    <span *ngIf="!signupForm.valid && signupForm.touched"
+      >Form is invalid!</span
+    >
+    <button type="submit">submit</button>
+  </div>
+</form>
