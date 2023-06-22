@@ -14,6 +14,8 @@ import { EditNoteComponent } from './edit-note/edit-note.component';
 import { ClockComponent } from './clock/clock.component';
 import { ContactFormTdComponent } from './contact-form-td/contact-form-td.component';
 import { ContactFormRComponent } from './contact-form-r/contact-form-r.component';
+import { ShortenPipe } from './pipes/shorten.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ContactFormRComponent } from './contact-form-r/contact-form-r.component
     ClockComponent,
     ContactFormTdComponent,
     ContactFormRComponent,
+    ShortenPipe,
+    FilterPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

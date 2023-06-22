@@ -8,6 +8,7 @@ import { NotesDataService } from '../services/notes-data.service';
   styleUrls: ['./all-notes.component.scss'],
 })
 export class AllNotesComponent {
+  filteredStatus = '';
   textInputValue = '';
   @ViewChild('titleInputValue', { static: true })
   titleInputValue: ElementRef<HTMLInputElement>;

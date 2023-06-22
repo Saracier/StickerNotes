@@ -8,7 +8,11 @@ import { DeletedNotesService } from '../services/deleted-notes.service';
 export class NotesDataService {
   constructor(private deletedNotes: DeletedNotesService) {}
   notes: NotesArray = [
-    { id: 456456, title: 'Hello World', text: 'Hello from the other site' },
+    {
+      id: 456456,
+      title: 'Hello World My Wonderfoul place',
+      text: 'Hello from the other site',
+    },
     { id: 23423424, title: 'Hello Giedi Prime', text: 'I love Dune books' },
     { id: 6363688, title: 'Hello There', text: 'General Kenobi' },
   ];
