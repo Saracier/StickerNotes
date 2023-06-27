@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { DeletedNotesService } from '../services/deleted-notes.service';
 import { NotesDataService } from '../services/notes-data.service';
+import { HttpMethodsService } from '../services/http-methods.service';
 
 @Component({
   selector: 'app-all-notes',
@@ -18,7 +19,8 @@ export class AllNotesComponent {
 
   constructor(
     private deletedNotes: DeletedNotesService,
-    private NotesDataService: NotesDataService
+    private NotesDataService: NotesDataService,
+    private HttpMethodsService: HttpMethodsService
   ) {}
 
   addNewNote() {
@@ -60,4 +62,16 @@ export class AllNotesComponent {
   //   this.textInputValue = (<HTMLInputElement>event.target).value;
   //   this.inputContainsSomething = Boolean(this.textInputValue.length > 0);
   // }
+
+  postNotes() {
+    this.HttpMethodsService.postNotesToBackend();
+  }
+
+  fetchNotes() {
+    this.HttpMethodsService.fetchNotesFromBackend();
+  }
+
+  ngDoCheck() {
+    this.notes = this.NotesDataService.notes;
+  }
 }

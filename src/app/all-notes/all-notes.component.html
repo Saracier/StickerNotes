@@ -29,6 +29,8 @@
 </div>
 <hr />
 <router-outlet></router-outlet>
+<button (click)="postNotes()">Save notes on server</button>
+<button (click)="fetchNotes()">Restore notes from server</button>
 <label for="filter">Filter notes</label
 ><input name="filter" type="text" [(ngModel)]="filteredStatus" />
 <div *ngIf="!(notes[0] === undefined); else nothingToShow">
