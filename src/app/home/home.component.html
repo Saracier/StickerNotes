@@ -1,4 +1,21 @@
-<button (click)="toggleLoggedIn()">Toggle logged in</button>
+use email: <br />test@test.pl <br />
+password: <br />password <br />
+<form [formGroup]="loginForm" (ngSubmit)="toggleLoggedIn()">
+  <label for="email">email</label
+  ><input id="email" name="email" type="text" formControlName="email" />
+  <label for="password">password</label
+  ><input
+    id="password"
+    name="password"
+    type="text"
+    formControlName="password"
+    minlenght="6"
+  />
+
+  <!-- <button type="submit">Toggle logged in</button> -->
+  <button (click)="toggleLoggedIn()" type="button">Log In</button>
+</form>
+<button (click)="LogOut()" type="button">Log out</button>
 <p>
   You are <b>{{ isLoggedIn ? "" : "NOT" }} logged in</b>
 </p>

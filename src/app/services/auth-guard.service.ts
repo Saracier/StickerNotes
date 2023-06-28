@@ -24,8 +24,8 @@ export class AuthGuardService implements CanActivateChild {
   // }
   constructor(private route: Router, private http: HttpClient) {}
 
-  toggleLoggedIn(isLoggedIn: boolean) {
-    console.log('toggle logged in w auth guard');
+  toggleLoggedIn(email: string, password: string) {
+    console.log('toggle logged in w auth guard', email, password);
     if (localStorage.getItem('userData') && this.isLoggedIn === false) {
       this.isLoggedIn = true;
     } else if (localStorage.getItem('userData')) {
@@ -37,7 +37,7 @@ export class AuthGuardService implements CanActivateChild {
     this.http
       .post(
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7DVQvn0G9g3uhJBkKhVAyBPHP0c67JCE',
-        { email: 'test@Test.pl', password: 'password', returnSecureToken: true }
+        { email: email, password: password, returnSecureToken: true }
       )
       .pipe(
         catchError(this.handleError),
@@ -51,6 +51,12 @@ export class AuthGuardService implements CanActivateChild {
         })
       )
       .subscribe((res) => console.log(res));
+  }
+
+  LogOut() {
+    console.log('Hello from authguard. Logged out ');
+    localStorage.removeItem('userData');
+    this.isLoggedIn = false;
   }
 
   checkIfUserShouldBeLogged(shouldtrust?: boolean) {
