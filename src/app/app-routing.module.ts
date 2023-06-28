@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { AllNotesComponent } from './all-notes/all-notes.component';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AuthGuardService } from './auth-guard.service';
+import { AuthGuardService } from './services/auth-guard.service';
 import { EditNoteComponent } from './edit-note/edit-note.component';
 import { ContactFormTdComponent } from './contact-form-td/contact-form-td.component';
 import { ContactFormRComponent } from './contact-form-r/contact-form-r.component';

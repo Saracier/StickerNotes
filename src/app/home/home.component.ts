@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthGuardService } from '../auth-guard.service';
+import { AuthGuardService } from '../services/auth-guard.service';
 
 @Component({
   selector: 'app-home',
@@ -21,5 +21,9 @@ export class HomeComponent {
     this.isLoggedIn = this.authGuard.isLoggedIn;
     localStorage.setItem('isLoggedIn', this.isLoggedIn ? '1' : '');
     console.log('loggedIn is ', this.isLoggedIn);
+  }
+
+  ngDoCheck() {
+    this.isLoggedIn = this.authGuard.isLoggedIn;
   }
 }

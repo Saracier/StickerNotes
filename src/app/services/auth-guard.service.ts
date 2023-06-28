@@ -1,0 +1,127 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  CanActivateChild,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { Observable } from 'rxjs';
+import { throwError } from 'rxjs/internal/observable/throwError';
+import { tap } from 'rxjs/internal/operators/tap';
+import { catchError } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuardService implements CanActivateChild {
+  isLoggedIn = false;
+
+  // toggleLoggedIn(isLoggedIn: boolean) {
+  //   this.isLoggedIn = !isLoggedIn;
+  //   console.log('loggedIn is ', this.isLoggedIn);
+  // }
+  constructor(private route: Router, private http: HttpClient) {}
+
+  toggleLoggedIn(isLoggedIn: boolean) {
+    console.log('toggle logged in w auth guard');
+    if (localStorage.getItem('userData') && this.isLoggedIn === false) {
+      this.isLoggedIn = true;
+    } else if (localStorage.getItem('userData')) {
+      console.log('auth guard toggleloggedin first check ');
+      localStorage.removeItem('userData');
+      this.isLoggedIn = false;
+      return;
+    }
+    this.http
+      .post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7DVQvn0G9g3uhJBkKhVAyBPHP0c67JCE',
+        { email: 'test@Test.pl', password: 'password', returnSecureToken: true }
+      )
+      .pipe(
+        catchError(this.handleError),
+        tap((resData: any) => {
+          this.handleAuthentication(
+            resData.email,
+            resData.localId,
+            resData.idToken,
+            +resData.expiresIn
+          );
+        })
+      )
+      .subscribe((res) => console.log(res));
+  }
+
+  checkIfUserShouldBeLogged(shouldtrust?: boolean) {
+    if (shouldtrust) {
+      this.isLoggedIn = true;
+      console.log(
+        'isloggedin wewnatrz checkIfUserShouldBeLogged',
+        this.isLoggedIn
+      );
+      return;
+    }
+    const userDataFromStorage = localStorage.getItem('userData');
+    let userData: any;
+    if (userDataFromStorage) {
+      userData = JSON.parse(userDataFromStorage);
+    }
+    if (userData) {
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
+  }
+
+  private handleAuthentication(
+    email: string,
+    userId: string,
+    token: string,
+    expiresIn: number
+  ) {
+    const user = { email, userId, token, expirationDate: expiresIn };
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    // this.autoLogout(expiresIn * 1000);
+    console.log('auth gurard handle authentication', user);
+    localStorage.setItem('userData', JSON.stringify(user));
+    this.checkIfUserShouldBeLogged(true);
+  }
+
+  handleError(errorRes: HttpErrorResponse) {
+    console.log('handleError w authguard');
+    let errorMessage = 'An unknown error occurred!';
+    if (!errorRes.error || !errorRes.error.error) {
+      return throwError(errorMessage);
+    }
+    return errorRes.error.error.message;
+  }
+
+  resolveIsAuthenticated(): Promise<boolean> {
+    const promise = new Promise<boolean>((resolve, reject) => {
+      setTimeout(() => {
+        resolve(true);
+      }, 500);
+    });
+    return promise;
+  }
+
+  canActivateChild(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('loggedIn is in guard', this.isLoggedIn);
+    console.log(
+      'local storage status in guard ',
+      localStorage.getItem('isLoggedIn'),
+      Boolean(localStorage.getItem('isLoggedIn'))
+    );
+    this.isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
+    console.log('loggedIn is in guard', this.isLoggedIn);
+    if (this.isLoggedIn) {
+      return this.resolveIsAuthenticated();
+    }
+    this.route.navigate(['/']);
+    return false;
+  }
+}
