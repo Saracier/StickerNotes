@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertDirectiveDirective } from '../alert-directive.directive';
+import { AlertComponentComponent } from '../alert-component/alert-component.component';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +15,15 @@ export class HomeComponent {
     email: FormControl<string>;
     password: FormControl<string>;
   }>;
+  failedToLogIn = false;
 
-  constructor(private authGuard: AuthGuardService) {
+  @ViewChild(AlertDirectiveDirective)
+  appAlertDirective: AlertDirectiveDirective;
+
+  constructor(
+    private authGuard: AuthGuardService,
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) {
     this.isLoggedIn = authGuard.isLoggedIn;
   }
 
@@ -54,5 +63,17 @@ export class HomeComponent {
 
   ngDoCheck() {
     this.isLoggedIn = this.authGuard.isLoggedIn;
+  }
+
+  private showErrorMessage(message: string) {
+    const alertFactoryResolver =
+      this.componentFactoryResolver.resolveComponentFactory(
+        AlertComponentComponent
+      );
+
+    const hostViewContainerRef = this.appAlertDirective.viewContainerRef;
+    hostViewContainerRef.clear();
+
+    const;
   }
 }
