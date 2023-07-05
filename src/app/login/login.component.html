@@ -1,19 +1,21 @@
-use email: <br />test@test.pl <br />
-password: <br />password <br />
-<form [formGroup]="loginForm" (ngSubmit)="toggleLoggedIn()">
-  <label for="email">email</label
-  ><input id="email" name="email" type="text" formControlName="email" />
-  <label for="password">password</label
-  ><input
-    id="password"
-    name="password"
-    type="text"
-    formControlName="password"
-    minlenght="6"
-  />
+<div class="login__form">
+  <p>use email: test@test.pl</p>
+  <p>password: password</p>
+  <form [formGroup]="loginForm" (ngSubmit)="toggleLoggedIn()">
+    <label for="email">email</label
+    ><input id="email" name="email" type="text" formControlName="email" />
+    <label for="password">password</label
+    ><input
+      id="password"
+      name="password"
+      type="text"
+      formControlName="password"
+      minlenght="6"
+    />
 
-  <!-- <button type="submit">Toggle logged in</button> -->
-  <button (click)="toggleLoggedIn()" type="button">Log In</button>
-</form>
-<ng-template appAlertDirective> </ng-template>
-<!-- <ng-template appAlertDirective *ngIf="failedToLogIn"> </ng-template> -->
+    <ng-template appAlertDirective> </ng-template>
+    <!-- <button type="submit">Toggle logged in</button> -->
+    <button (click)="toggleLoggedIn()" type="button">Log In</button>
+  </form>
+  <!-- <ng-template appAlertDirective *ngIf="failedToLogIn"> </ng-template> -->
+</div>

@@ -1,18 +1,22 @@
-<div *ngIf="isLoggedIn">
-  <button (click)="LogOut()" type="button">Log out</button>
-</div>
-<div *ngIf="!isLoggedIn">
-  <button (click)="LogOut()" type="button">
-    <a [routerLink]="['/login']">Log In</a>
-  </button>
-</div>
+<div class="home__container">
+  <div class="home__container--loginout" *ngIf="isLoggedIn">
+    <button (click)="LogOut()" type="button">Log out</button>
+  </div>
+  <div class="home__container--loginout" *ngIf="!isLoggedIn">
+    <button type="button">
+      <a [routerLink]="['/login']">Log In</a>
+    </button>
+  </div>
 
-<p>
-  You are <b>{{ isLoggedIn ? "" : "NOT" }} logged in</b>
-</p>
-<button><a [routerLink]="['/allNotes']">Go to your notes</a></button>
-<button>
-  <a [routerLink]="['/contacttd']">Template-driven contact form</a>
-</button>
-<button><a [routerLink]="['/contactr']">Reactive contact form</a></button>
-<router-outlet></router-outlet>
+  <p class="home__container--status">
+    You are <b>{{ isLoggedIn ? "" : "NOT" }} logged in</b>
+  </p>
+  <div class="home__nav">
+    <button><a [routerLink]="['/allNotes']">Go to your notes</a></button>
+    <button>
+      <a [routerLink]="['/contacttd']">Template-driven contact form</a>
+    </button>
+    <button><a [routerLink]="['/contactr']">Reactive contact form</a></button>
+  </div>
+  <router-outlet></router-outlet>
+</div>

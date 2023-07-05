@@ -1,7 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+$base-color: #1e1f20;
+$dark-color: #111213;
+
 :root {
-  background-color: #5c5346;
+  background-color: $dark-color;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: white;
+}

@@ -1,29 +1,35 @@
-<div class="input">
-  <label for="title">title</label>
-  <input
-    name="title"
-    type="text"
-    (keyup.enter)="addNewNote()"
-    (input)="evaluateInput()"
-    #titleInputValue
-  />
-  <label for="text">text</label>
-  <input
-    name="text"
-    type="text"
-    [(ngModel)]="textInputValue"
-    (keyup.enter)="addNewNote()"
-    (input)="evaluateInput()"
-  />
-  <!-- <input
+<div class="notes--new">
+  <!-- <p>add new note</p> -->
+  <div class="notes--inputs">
+    <div>
+      <label for="title">title</label>
+      <input
+        name="title"
+        type="text"
+        (keyup.enter)="addNewNote()"
+        (input)="evaluateInput()"
+        #titleInputValue
+      />
+    </div>
+    <div>
+      <label for="text">text</label>
+      <input
+        name="text"
+        type="text"
+        [(ngModel)]="textInputValue"
+        (keyup.enter)="addNewNote()"
+        (input)="evaluateInput()"
+      />
+    </div>
+    <!-- <input
     type="text"
     (input)="onUpdateInput($event)"
     (keyup.enter)="addNewNote()"
   /> -->
-  <button [disabled]="!inputContainsSomething" (click)="addNewNote()">
-    Add note
-  </button>
-
+    <button [disabled]="!inputContainsSomething" (click)="addNewNote()">
+      Add new note
+    </button>
+  </div>
   <!-- https://i.pinimg.com/originals/0d/c8/80/0dc8807679a4c53e79ca35c4d5356e94.jpg
  https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1J1cW3h74b_XcC5XqEhUVu0xgdF1_5tJe9Q&usqp=CAU -->
 </div>

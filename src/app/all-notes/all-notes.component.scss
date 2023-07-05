@@ -1,5 +1,29 @@
-.input {
-  width: 100%;
+.notes--new {
+  box-sizing: border-box;
+  // width: 100%;
   display: flex;
   justify-content: center;
+  margin: 20px;
+  p {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 20px;
+  }
+  button {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .notes--inputs {
+    margin: 10px;
+    button {
+      margin: auto;
+    }
+    input {
+      margin: 0 0 10px 0;
+      border-radius: 5px;
+      width: 300px;
+      padding: 10px;
+    }
+  }
 }
