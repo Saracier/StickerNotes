@@ -6,17 +6,4 @@ import { AlertDirectiveDirective } from '../alert-directive.directive';
   templateUrl: './alert-component.component.html',
   styleUrls: ['./alert-component.component.scss'],
 })
-export class AlertComponentComponent {
-  @ViewChild(AlertDirectiveDirective)
-  appAlertDirective: AlertDirectiveDirective;
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
-
-  private showErrorMessage(message: string) {
-    const alertFactoryResolver =
-      this.componentFactoryResolver.resolveComponentFactory(
-        AlertComponentComponent
-      );
-
-    const hostViewContainerRef = this.appAlertDirective.viewContainerRef;
-  }
-}
+export class AlertComponentComponent {}

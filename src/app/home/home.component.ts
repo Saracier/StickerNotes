@@ -17,7 +17,7 @@ export class HomeComponent {
   }>;
   failedToLogIn = false;
 
-  @ViewChild(AlertDirectiveDirective)
+  @ViewChild(AlertDirectiveDirective, { static: false })
   appAlertDirective: AlertDirectiveDirective;
 
   constructor(
@@ -48,7 +48,8 @@ export class HomeComponent {
   toggleLoggedIn() {
     console.log('weszlo toggleloggedin');
     if (!this.loginForm.value.email || !this.loginForm.value.password) {
-      alert('invalid passoword or email');
+      // alert('invalid passoword or email');
+      this.showErrorMessage('invalid passoword or email');
       return;
     }
     this.authGuard.toggleLoggedIn(
@@ -74,6 +75,6 @@ export class HomeComponent {
     const hostViewContainerRef = this.appAlertDirective.viewContainerRef;
     hostViewContainerRef.clear();
 
-    const;
+    hostViewContainerRef.createComponent(alertFactoryResolver);
   }
 }

@@ -15,7 +15,8 @@ password: <br />password <br />
   <!-- <button type="submit">Toggle logged in</button> -->
   <button (click)="toggleLoggedIn()" type="button">Log In</button>
 </form>
-<app-alert-component *ngIf="failedToLogIn"> </app-alert-component>
+<ng-template appAlertDirective> </ng-template>
+<!-- <ng-template appAlertDirective *ngIf="failedToLogIn"> </ng-template> -->
 <button (click)="LogOut()" type="button">Log out</button>
 <p>
   You are <b>{{ isLoggedIn ? "" : "NOT" }} logged in</b>
