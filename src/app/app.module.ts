@@ -20,6 +20,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertComponentComponent } from './alert-component/alert-component.component';
 import { AlertDirectiveDirective } from './alert-directive.directive';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AlertDirectiveDirective } from './alert-directive.directive';
     FilterPipe,
     AlertComponentComponent,
     AlertDirectiveDirective,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

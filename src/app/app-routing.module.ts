@@ -8,6 +8,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { EditNoteComponent } from './edit-note/edit-note.component';
 import { ContactFormTdComponent } from './contact-form-td/contact-form-td.component';
 import { ContactFormRComponent } from './contact-form-r/contact-form-r.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
       { path: 'contactr', component: ContactFormRComponent },
     ],
   },
+  { path: 'login', component: LoginComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' },
 ];
