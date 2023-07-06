@@ -1,6 +1,6 @@
-<div class="notes--new">
+<div class="notes__new">
   <!-- <p>add new note</p> -->
-  <div class="notes--inputs">
+  <div class="notes__new--inputs">
     <div>
       <label for="title">title</label>
       <input
@@ -35,11 +35,13 @@
 </div>
 <hr />
 <router-outlet></router-outlet>
-<button (click)="postNotes()">Save notes on server</button>
-<button (click)="fetchNotes()">Restore notes from server</button>
-<label for="filter">Filter notes</label
-><input name="filter" type="text" [(ngModel)]="filteredStatus" />
-<div *ngIf="!(notes[0] === undefined); else nothingToShow">
+<div class="notes__actions">
+  <button (click)="postNotes()">Save</button>
+  <button (click)="fetchNotes()">Restore</button>
+  <label for="filter">Filter notes</label
+  ><input name="filter" type="text" [(ngModel)]="filteredStatus" />
+</div>
+<div class="notes__main" *ngIf="!(notes[0] === undefined); else nothingToShow">
   <div
     *ngFor="
       let singleNote of notes | filter : this.filteredStatus : 'title';

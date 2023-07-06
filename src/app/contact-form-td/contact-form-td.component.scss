@@ -1,10 +1,25 @@
-div {
+.tdform {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#userTicker {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 350px;
+
+  input,
+  select,
+  textarea {
+    margin: 5px;
+  }
 
   button {
     margin: 20px;
+    padding: 5px;
   }
 }
 

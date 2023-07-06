@@ -1,4 +1,4 @@
-.notes--new {
+.notes__new {
   box-sizing: border-box;
   // width: 100%;
   display: flex;
@@ -14,7 +14,7 @@
     display: flex;
     justify-content: flex-end;
   }
-  .notes--inputs {
+  .notes__new--inputs {
     margin: 10px;
     button {
       margin: auto;
@@ -25,5 +25,26 @@
       width: 300px;
       padding: 10px;
     }
+  }
+}
+
+.notes__actions {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  button {
+    margin: 10px;
+  }
+}
+
+.notes__main {
+  display: flex;
+  flex-wrap: wrap;
+
+  .notes {
+    border: 1px solid white;
+    width: 300px;
+    margin: 5px;
+    height: 100%;
   }
 }

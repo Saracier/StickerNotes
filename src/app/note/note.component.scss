@@ -1,0 +1,13 @@
+.note__single {
+  padding: 5px;
+}
+
+.note__buttons {
+  display: flex;
+  justify-content: center;
+
+  button {
+    margin: 5px;
+    cursor: pointer;
+  }
+}

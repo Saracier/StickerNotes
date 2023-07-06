@@ -1,8 +1,10 @@
 <div class="note" appFocus>
-  <p>
-    {{ note.id }}# {{ note.title | uppercase | shorten : 17 }} | {{ note.text }}
-  </p>
-  <button (click)="deleteHandler()">Delete note</button>
-  <button (click)="goToEditComponent()">Edit this note</button>
+  <div class="note__single">
+    <h3>{{ note.id }}# {{ note.title | uppercase | shorten : 17 }}</h3>
+    <span>{{ note.text }}</span>
+  </div>
+  <div class="note__buttons">
+    <button (click)="deleteHandler()">Delete</button>
+    <button (click)="goToEditComponent()">Edit</button>
+  </div>
 </div>
-<hr />
