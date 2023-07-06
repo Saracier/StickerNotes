@@ -29,48 +29,31 @@ export class HttpMethodsService {
 
   fetchNotesFromBackend() {
     const helperArray: { id: number; title: string; text: string }[] = [];
-    return (
-      this.http
-        .get<{ [key: string]: { id: number; title: string; text: string } }>(
-          'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
+    return this.http
+      .get<{ [key: string]: { id: number; title: string; text: string } }>(
+        'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
+      )
+      .pipe(
+        map(
+          (responeData: {
+            [key: string]: { id: number; title: string; text: string };
+          }) => {
+            for (const key in responeData) helperArray.push(responeData[key]);
+            return helperArray;
+          }
         )
-        // .pipe(
-        //   map((responseData) => {
-        //     const postsArray: Post[] = [];
-        //     for (const key in responseData) {
-        //       if (responseData.hasOwnProperty(key)) {
-        //         postsArray.push({ ...responseData[key], id: key });
-        //       }
-        //     }
-        //     return postsArray;
-        //   }),
-        //   catchError((errorRes) => {
-        //     // Send to analytics server
-        //     return throwError(errorRes);
-        //   })
-        // )
-        .pipe(
-          map(
-            (responeData: {
-              [key: string]: { id: number; title: string; text: string };
-            }) => {
-              for (const key in responeData) helperArray.push(responeData[key]);
-              return helperArray;
-            }
+      )
+      .subscribe((responseData) => {
+        console.log(responseData);
+        this.NotesDataService.notes = [];
+        responseData.forEach((element) =>
+          this.NotesDataService.addNewNote(
+            element.id,
+            element.title,
+            element.text
           )
-        )
-        .subscribe((responseData) => {
-          console.log(responseData);
-          this.NotesDataService.notes = [];
-          responseData.forEach((element) =>
-            this.NotesDataService.addNewNote(
-              element.id,
-              element.title,
-              element.text
-            )
-          );
-        })
-    );
+        );
+      });
   }
 
   async deletePosts() {

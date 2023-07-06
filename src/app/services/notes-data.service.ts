@@ -36,9 +36,3 @@ export class NotesDataService {
     this.deletedNotes.catchOldNote(this.notes.splice(numberInArray, 1));
   }
 }
-
-// const exampleNotesArray = [
-// { id: 456456, title: 'Hello World', text: 'Hello from the other site' },
-// { id: 23423424, title: 'Hello Giedi Prime', text: 'I love Dune books' },
-// { id: 6363688, title: 'Hello There', text: 'General Kenobi' },
-// ];

@@ -1,8 +1,5 @@
-import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthGuardService } from '../services/auth-guard.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertDirectiveDirective } from '../alert-directive.directive';
-import { AlertComponentComponent } from '../alert-component/alert-component.component';
 
 @Component({
   selector: 'app-home',

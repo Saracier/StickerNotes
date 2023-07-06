@@ -25,28 +25,5 @@ export class FocusDirective implements OnInit {
     this.textColor = 'white';
   }
 
-  // @HostListener('mouseenter') mouseIsInside(eventData: Event) {
-  //   this.renderer.setStyle(
-  //     this.elRef.nativeElement,
-  //     'background-color',
-  //     'yellow'
-  //   );
-  // }
-  // @HostListener('mouseleave') mouseIsGone(eventData: Event) {
-  //   this.renderer.setStyle(
-  //     this.elRef.nativeElement,
-  //     'background-color',
-  //     'transparent'
-  //   );
-  // }
-  ngOnInit() {
-    // ;
-    // constructor(private elRef: ElementRef, private renderer: Renderer2) {}
-    // ngOnInit() {
-    //   this.renderer.setStyle(
-    //     this.elRef.nativeElement,
-    //     'background-color',
-    //     'yellow'
-    //   );
-  }
+  ngOnInit() {}
 }

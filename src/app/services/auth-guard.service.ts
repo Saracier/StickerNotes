@@ -2,7 +2,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
-  CanActivate,
   CanActivateChild,
   Router,
   RouterStateSnapshot,
@@ -18,10 +17,6 @@ import { catchError } from 'rxjs/operators';
 export class AuthGuardService implements CanActivateChild {
   isLoggedIn = false;
 
-  // toggleLoggedIn(isLoggedIn: boolean) {
-  //   this.isLoggedIn = !isLoggedIn;
-  //   console.log('loggedIn is ', this.isLoggedIn);
-  // }
   constructor(private route: Router, private http: HttpClient) {}
 
   toggleLoggedIn(email: string, password: string) {
@@ -88,7 +83,6 @@ export class AuthGuardService implements CanActivateChild {
   ) {
     const user = { email, userId, token, expirationDate: expiresIn };
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    // this.autoLogout(expiresIn * 1000);
     console.log('auth gurard handle authentication', user);
     localStorage.setItem('userData', JSON.stringify(user));
     this.checkIfUserShouldBeLogged(true);

@@ -2,9 +2,6 @@
   <p>This is a form component maked in Template-Driven approach</p>
   <form (ngSubmit)="onSubmit()" #formTDElement="ngForm">
     <div id="userTicker" ngModelGroup="userSendUsTicket">
-      <!-- ngModelGroup jest po to, żeby w outpucie nam wrzucić
-    wszustko do wartości obiektu tak jak się nazywa ngModelGroup.
-    Można tak ładnie zgrupować dane. -->
       <label for="username"> Name : </label>
       <input
         id="username"

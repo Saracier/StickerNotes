@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscriber } from 'rxjs';
-import { interval, Subscription, Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs';
 
 @Component({
@@ -31,7 +31,7 @@ export class ClockComponent {
         })
       )
       .subscribe(
-        (count: number) => {
+        () => {
           this.updateTime();
         },
         (error: Error) => {

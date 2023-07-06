@@ -1,5 +1,4 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { DeletedNotesService } from '../services/deleted-notes.service';
 import { NotesDataService } from '../services/notes-data.service';
 import { HttpMethodsService } from '../services/http-methods.service';
 
@@ -18,7 +17,6 @@ export class AllNotesComponent {
   notes = this.NotesDataService.notes;
 
   constructor(
-    private deletedNotes: DeletedNotesService,
     private NotesDataService: NotesDataService,
     private HttpMethodsService: HttpMethodsService
   ) {}
@@ -37,31 +35,15 @@ export class AllNotesComponent {
 
     this.counter++;
     this.textInputValue = '';
-    // this.titleInputValue = '';
   }
 
   evaluateInput() {
     this.inputContainsSomething = Boolean(this.textInputValue.length > 0);
-    // this.inputContainsSomething = Boolean(this.titleInputValue.length > 0);
   }
 
   onDeleteSingleNote(deleteObject: { id: number }) {
     this.NotesDataService.onDeleteSingleNote(deleteObject);
-
-    // const numberInArray = this.notes.findIndex((element) => {
-    //   return element.id === deleteObject.id;
-    // });
-    // if (numberInArray < 0)
-    //   throw new Error(
-    //     'something went wrong. Index of note for delete exeeded array'
-    //   );
-    // this.deletedNotes.catchOldNote(this.notes.splice(numberInArray, 1));
   }
-
-  // onUpdateInput(event: Event) {
-  //   this.textInputValue = (<HTMLInputElement>event.target).value;
-  //   this.inputContainsSomething = Boolean(this.textInputValue.length > 0);
-  // }
 
   postNotes() {
     this.HttpMethodsService.postNotesToBackend();

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { NotesArray } from '../notes-array';
 import { NotesDataService } from '../services/notes-data.service';
 
 @Component({
@@ -49,7 +48,6 @@ export class EditNoteComponent {
     this.inputContainsSomething = Boolean(
       this.singleNote.title.length > 0 && this.singleNote.text.length > 0
     );
-    // this.inputContainsSomething = Boolean(this.titleInputValue.length > 0);
   }
 
   saveEditedNote() {

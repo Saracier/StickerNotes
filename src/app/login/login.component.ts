@@ -45,7 +45,6 @@ export class LoginComponent {
   toggleLoggedIn() {
     console.log('weszlo toggleloggedin');
     if (!this.loginForm.value.email || !this.loginForm.value.password) {
-      // alert('invalid passoword or email');
       this.showErrorMessage('invalid passoword or email');
       return;
     }

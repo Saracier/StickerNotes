@@ -20,9 +20,5 @@ export class NoteComponent {
 
   goToEditComponent() {
     this.router.navigate(['/allNotes', 'edit', this.note.id]);
-    // this.router.navigate(['/servers', this.note.id, 'edit'], {
-    //   queryParams: { allowEdit: 1 },
-    //   fragment: 'loading',
-    // });
   }
 }
