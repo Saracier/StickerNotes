@@ -90,6 +90,7 @@ export class AuthGuardService implements CanActivateChild {
 
   handleError(errorRes: HttpErrorResponse) {
     console.log('handleError w authguard');
+    alert('invalid data');
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
@@ -101,7 +102,7 @@ export class AuthGuardService implements CanActivateChild {
     const promise = new Promise<boolean>((resolve, reject) => {
       setTimeout(() => {
         resolve(true);
-      }, 500);
+      }, 100);
     });
     return promise;
   }
@@ -110,17 +111,18 @@ export class AuthGuardService implements CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('loggedIn is in guard', this.isLoggedIn);
+    const dataInStorage = localStorage.getItem('userData');
+    if (!dataInStorage) return false;
+    this.isLoggedIn = Boolean(JSON.parse(dataInStorage).userId);
     console.log(
-      'local storage status in guard ',
-      localStorage.getItem('isLoggedIn'),
-      Boolean(localStorage.getItem('isLoggedIn'))
+      'loggedIn is in guard',
+      this.isLoggedIn,
+      JSON.parse(dataInStorage).userId
     );
-    this.isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
-    console.log('loggedIn is in guard', this.isLoggedIn);
     if (this.isLoggedIn) {
       return this.resolveIsAuthenticated();
     }
+
     this.route.navigate(['/']);
     return false;
   }

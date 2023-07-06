@@ -29,7 +29,7 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-    this.isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
+    this.isLoggedIn = Boolean(localStorage.getItem('userData'));
     this.loginForm = new FormGroup({
       email: new FormControl('', {
         nonNullable: true,
@@ -54,8 +54,6 @@ export class LoginComponent {
     );
     console.log('weszlo toggleloggedin 5 linijek dalej');
     this.isLoggedIn = this.authGuard.isLoggedIn;
-    localStorage.setItem('isLoggedIn', this.isLoggedIn ? '1' : '');
-    console.log('loggedIn is ', this.isLoggedIn);
     this.router.navigate(['/']);
   }
 
