@@ -14,7 +14,7 @@ export class ClockComponent {
   second: string;
   firstObsSubscripcion: Subscription;
   ngOnInit() {
-    fetch('http://worldtimeapi.org/api/timezone/Europe/Warsaw')
+    fetch('https://worldtimeapi.org/api/timezone/Europe/Warsaw')
       .then((res) => {
         return res.json();
       })
