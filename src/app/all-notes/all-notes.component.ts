@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { NotesDataService } from '../services/notes-data.service';
 import { HttpMethodsService } from '../services/http-methods.service';
 
@@ -13,7 +13,7 @@ export class AllNotesComponent {
   @ViewChild('titleInputValue', { static: true })
   titleInputValue: ElementRef<HTMLInputElement>;
   inputContainsSomething = false;
-  counter: number = 1;
+  counter = 1;
   notes = this.NotesDataService.notes;
 
   constructor(

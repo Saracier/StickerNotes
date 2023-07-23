@@ -91,7 +91,7 @@ export class AuthGuardService implements CanActivateChild {
   handleError(errorRes: HttpErrorResponse) {
     console.log('handleError w authguard');
     alert('invalid data');
-    let errorMessage = 'An unknown error occurred!';
+    const errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
     }
