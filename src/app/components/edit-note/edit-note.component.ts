@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { NotesDataService } from '../services/notes-data.service';
+import { NotesDataService } from '../../services/notes-data.service';
 
 @Component({
   selector: 'app-edit-note',

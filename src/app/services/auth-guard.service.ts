@@ -112,7 +112,11 @@ export class AuthGuardService implements CanActivateChild {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     const dataInStorage = localStorage.getItem('userData');
-    if (!dataInStorage) return false;
+    // if (!dataInStorage) return false;
+    if (!dataInStorage) {
+      this.route.navigate(['/login']);
+      return false;
+    }
     this.isLoggedIn = Boolean(JSON.parse(dataInStorage).userId);
     console.log(
       'loggedIn is in guard',
@@ -122,8 +126,7 @@ export class AuthGuardService implements CanActivateChild {
     if (this.isLoggedIn) {
       return this.resolveIsAuthenticated();
     }
-
-    this.route.navigate(['/']);
+    this.route.navigate(['/login']);
     return false;
   }
 }

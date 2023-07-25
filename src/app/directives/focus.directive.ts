@@ -3,14 +3,13 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
-  OnInit,
   Renderer2,
 } from '@angular/core';
 
 @Directive({
   selector: '[appFocus]',
 })
-export class FocusDirective implements OnInit {
+export class FocusDirective {
   constructor(private elRef: ElementRef, private renderer: Renderer2) {}
 
   @HostBinding('style.background-color') backColor = 'transparent';
@@ -24,6 +23,4 @@ export class FocusDirective implements OnInit {
     this.backColor = 'transparent';
     this.textColor = 'white';
   }
-
-  ngOnInit() {}
 }

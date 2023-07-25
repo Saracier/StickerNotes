@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, OnChanges } from '@angular/core';
-import { NotesDataService } from '../services/notes-data.service';
-import { HttpMethodsService } from '../services/http-methods.service';
+import { NotesDataService } from '../../services/notes-data.service';
+import { HttpMethodsService } from '../../services/http-methods.service';
 
 @Component({
   selector: 'app-all-notes',
