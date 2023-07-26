@@ -8,7 +8,6 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { tap } from 'rxjs/internal/operators/tap';
 import { catchError } from 'rxjs/operators';
 import { LoginService } from './login.service';
 
@@ -44,17 +43,24 @@ export class AuthGuardService implements CanActivateChild {
         { email: email, password: password, returnSecureToken: true }
       )
       .pipe(
-        catchError(this.handleError),
-        tap((resData: any) => {
-          this.handleAuthentication(
-            resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn
-          );
-        })
+        catchError(this.handleError)
+        // tap((resData: any) => {
+        //   this.handleAuthentication(
+        //     resData.email,
+        //     resData.localId,
+        //     resData.idToken,
+        //     +resData.expiresIn
+        //   );
+        // })
       )
-      .subscribe((res) => console.log(res));
+      .subscribe((res: any) =>
+        this.handleAuthentication(
+          res.email,
+          res.localId,
+          res.idToken,
+          +res.expiresIn
+        )
+      );
   }
 
   handleError(errorRes: HttpErrorResponse) {

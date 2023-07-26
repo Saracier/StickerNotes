@@ -4,12 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DeletedNotesService {
+  //
+  // Todo: add persistant trash of notes
+  //
   oldNotes: oldNote[] = [];
   catchOldNote(note: oldNote[]) {
     this.oldNotes.push(...note);
-    console.log('note has been transferred to trash');
   }
-  constructor() {}
 }
 
 interface oldNote {

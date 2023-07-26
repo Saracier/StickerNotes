@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotesDataService } from '../services/notes-data.service';
-import { NotesArray } from '../notes-array';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -44,7 +43,6 @@ export class HttpMethodsService {
         )
       )
       .subscribe((responseData) => {
-        console.log(responseData);
         this.NotesDataService.notes = [];
         responseData.forEach((element) =>
           this.NotesDataService.addNewNote(
@@ -57,7 +55,6 @@ export class HttpMethodsService {
   }
 
   async deletePosts() {
-    console.log('isdeleting');
     return this.http
       .delete(
         'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'

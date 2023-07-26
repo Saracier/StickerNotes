@@ -1,19 +1,14 @@
-import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contact-form-r',
   templateUrl: './contact-form-r.component.html',
   styleUrls: ['./contact-form-r.component.scss'],
 })
-export class ContactFormRComponent {
+export class ContactFormRComponent implements OnInit {
   genders = ['male', 'female'];
-  forbiddenUsernames = ['Goku', 'Gohan'];
+  forbiddenUsernames = ['Admin', 'Goku', 'Moderator', 'Saracier'];
   signupForm: FormGroup;
   ngOnInit() {
     this.signupForm = new FormGroup({

@@ -1,4 +1,10 @@
-import { Component, ViewChild, ElementRef, DoCheck } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  DoCheck,
+  OnInit,
+} from '@angular/core';
 import { NotesDataService } from '../../services/notes-data.service';
 import { HttpMethodsService } from '../../services/http-methods.service';
 
@@ -7,19 +13,22 @@ import { HttpMethodsService } from '../../services/http-methods.service';
   templateUrl: './all-notes.component.html',
   styleUrls: ['./all-notes.component.scss'],
 })
-export class AllNotesComponent implements DoCheck {
+export class AllNotesComponent implements DoCheck, OnInit {
   filteredStatus = '';
   textInputValue = '';
   @ViewChild('titleInputValue', { static: true })
   titleInputValue: ElementRef<HTMLInputElement>;
   inputContainsSomething = false;
-  counter = 1;
   notes = this.NotesDataService.notes;
 
   constructor(
     private NotesDataService: NotesDataService,
     private HttpMethodsService: HttpMethodsService
   ) {}
+
+  ngOnInit() {
+    this.fetchNotes();
+  }
 
   addNewNote() {
     if (
@@ -28,12 +37,11 @@ export class AllNotesComponent implements DoCheck {
     )
       return;
     this.NotesDataService.addNewNote(
-      this.counter,
+      Math.random(),
       this.titleInputValue.nativeElement.value,
       this.textInputValue
     );
 
-    this.counter++;
     this.textInputValue = '';
   }
 
@@ -53,6 +61,15 @@ export class AllNotesComponent implements DoCheck {
     this.HttpMethodsService.fetchNotesFromBackend();
   }
 
+  //
+  //
+  //
+  //
+  //
+  //To poniżej mi się nie podoba, ale nie wiem jak to zmienić
+  //
+  //
+  //
   ngDoCheck() {
     this.notes = this.NotesDataService.notes;
   }

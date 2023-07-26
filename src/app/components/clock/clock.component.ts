@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscriber } from 'rxjs';
 import { Subscription, Observable } from 'rxjs';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-clock',
   templateUrl: './clock.component.html',
   styleUrls: ['./clock.component.scss'],
 })
-export class ClockComponent {
+export class ClockComponent implements OnInit, OnDestroy {
   hour: string;
   minute: string;
   second: string;
@@ -24,23 +23,17 @@ export class ClockComponent {
         this.minute = resDate.getMinutes().toString();
         this.second = resDate.getSeconds().toString();
       });
-    this.firstObsSubscripcion = this.customIntervalObservable
-      .pipe(
-        map((element: number) => {
-          return element;
-        })
-      )
-      .subscribe(
-        () => {
-          this.updateTime();
-        },
-        (error: Error) => {
-          alert(error);
-        },
-        () => {
-          alert('Observable completed');
-        }
-      );
+    this.firstObsSubscripcion = this.customIntervalObservable.subscribe(
+      () => {
+        this.updateTime();
+      },
+      (error: Error) => {
+        alert(error);
+      },
+      () => {
+        alert('Observable completed');
+      }
+    );
   }
 
   ngOnDestroy() {

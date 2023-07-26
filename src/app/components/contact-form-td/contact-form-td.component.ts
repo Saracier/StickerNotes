@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
 export class ContactFormTdComponent {
   messageInput: string;
   @ViewChild('formTDElement') formTDElement: NgForm;
-  defoultAnswer = 'yes';
+  defaultAnswer = 'yes';
   genders = ['male', 'female'];
 
   onSubmit() {

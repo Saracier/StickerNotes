@@ -11,7 +11,7 @@
   <p class="home__container--status" [ngClass]="{ hidden: isLoggedIn }">
     You are <b>{{ isLoggedIn ? "" : "NOT" }}</b> logged in
   </p>
-  <div class="home__nav" [ngClass]="{ hidden: !isLoggedIn }">
+  <div class="home__nav">
     <button><a [routerLink]="['/allNotes']">Go to your notes</a></button>
     <button>
       <a [routerLink]="['/contacttd']">Template-driven contact form</a>
@@ -20,4 +20,6 @@
   </div>
 </div>
 <hr />
-<router-outlet></router-outlet>
+<div [ngClass]="{ hidden: !isLoggedIn }">
+  <router-outlet></router-outlet>
+</div>
