@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NoteComponent } from './note/note.component';
+import { NoteComponent } from './components/note/note.component';
 import { FocusDirective } from './directives/focus.directive';
 import { HomeComponent } from './components/home/home.component';
 import { AllNotesComponent } from './components/all-notes/all-notes.component';

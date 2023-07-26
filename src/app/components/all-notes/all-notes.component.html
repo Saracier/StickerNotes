@@ -37,11 +37,15 @@
   <div
     *ngFor="
       let singleNote of notes | filter : this.filteredStatus : 'title';
-      let i = index
+      let indexSingleNote = index
     "
     class="notes"
   >
-    <app-note [note]="singleNote" (deleteNote)="onDeleteSingleNote($event)">
+    <app-note
+      [note]="singleNote"
+      (deleteNote)="onDeleteSingleNote($event)"
+      [index]="indexSingleNote + 1"
+    >
     </app-note>
   </div>
 </div>

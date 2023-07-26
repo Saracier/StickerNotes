@@ -8,10 +8,10 @@
     </button>
   </div>
 
-  <p class="home__container--status">
-    You are <b>{{ isLoggedIn ? "" : "NOT" }} logged in</b>
+  <p class="home__container--status" [ngClass]="{ hidden: isLoggedIn }">
+    You are <b>{{ isLoggedIn ? "" : "NOT" }}</b> logged in
   </p>
-  <div class="home__nav">
+  <div class="home__nav" [ngClass]="{ hidden: !isLoggedIn }">
     <button><a [routerLink]="['/allNotes']">Go to your notes</a></button>
     <button>
       <a [routerLink]="['/contacttd']">Template-driven contact form</a>

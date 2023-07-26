@@ -12,8 +12,10 @@ export class NoteComponent {
     title: '',
     text: '',
   };
+  @Input() index: number;
   @Output() deleteNote = new EventEmitter<{ id: number }>();
   constructor(private router: Router) {}
+
   deleteHandler() {
     this.deleteNote.emit({ id: this.note.id });
   }

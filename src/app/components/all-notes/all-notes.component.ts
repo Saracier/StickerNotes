@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnChanges } from '@angular/core';
+import { Component, ViewChild, ElementRef, DoCheck } from '@angular/core';
 import { NotesDataService } from '../../services/notes-data.service';
 import { HttpMethodsService } from '../../services/http-methods.service';
 
@@ -7,7 +7,7 @@ import { HttpMethodsService } from '../../services/http-methods.service';
   templateUrl: './all-notes.component.html',
   styleUrls: ['./all-notes.component.scss'],
 })
-export class AllNotesComponent {
+export class AllNotesComponent implements DoCheck {
   filteredStatus = '';
   textInputValue = '';
   @ViewChild('titleInputValue', { static: true })
