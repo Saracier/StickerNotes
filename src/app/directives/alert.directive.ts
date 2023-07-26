@@ -1,8 +1,8 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[appAlertDirective]',
+  selector: '[appAlert]',
 })
-export class AlertDirectiveDirective {
+export class AlertDirective {
   constructor(public viewContainerRef: ViewContainerRef) {}
 }

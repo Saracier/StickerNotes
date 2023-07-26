@@ -6,10 +6,11 @@ import {
 } from '@angular/core';
 import { AuthGuardService } from '../../services/auth-guard.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertDirectiveDirective } from '../../directives/alert-directive.directive';
+import { AlertDirective } from '../../directives/alert.directive';
 import { AlertComponentComponent } from '../../alert/alert.component';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +19,9 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
   isLoggedIn: boolean;
-  @ViewChild(AlertDirectiveDirective, { static: false })
-  appAlertDirective: AlertDirectiveDirective;
+  @ViewChild(AlertDirective, { static: false })
+  appAlertDirective: AlertDirective;
+  private closeDynamicComponentSub: Subscription;
 
   loginForm: FormGroup<{
     email: FormControl<string>;
@@ -63,7 +65,7 @@ export class LoginComponent implements OnInit {
     setTimeout(() => {
       console.log('this.isLoggedIn', this.isLoggedIn);
       if (!this.isLoggedIn) {
-        this.showErrorMessage('invalid passoword or email');
+        this.showErrorMessage('Invalid passoword or email');
         return;
       }
       this.router.navigate(['/']);
@@ -71,7 +73,6 @@ export class LoginComponent implements OnInit {
     // this.isLoggedIn = this.authGuard.isLoggedIn;
   }
 
-  // standalone component. Skończyć go w wolnej chwili
   private showErrorMessage(message: string) {
     const alertFactoryResolver =
       this.componentFactoryResolver.resolveComponentFactory(
@@ -81,6 +82,15 @@ export class LoginComponent implements OnInit {
     const hostViewContainerRef = this.appAlertDirective.viewContainerRef;
     hostViewContainerRef.clear();
 
-    hostViewContainerRef.createComponent(alertFactoryResolver);
+    const componentRef =
+      hostViewContainerRef.createComponent(alertFactoryResolver);
+
+    componentRef.instance.message = message;
+    this.closeDynamicComponentSub = componentRef.instance.closeEvent.subscribe(
+      () => {
+        this.closeDynamicComponentSub.unsubscribe();
+        hostViewContainerRef.clear();
+      }
+    );
   }
 }

@@ -19,7 +19,7 @@ import { ShortenPipe } from './pipes/shorten.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertComponentComponent } from './alert/alert.component';
-import { AlertDirectiveDirective } from './directives/alert-directive.directive';
+import { AlertDirective } from './directives/alert.directive';
 import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
@@ -37,7 +37,7 @@ import { LoginComponent } from './components/login/login.component';
     ShortenPipe,
     FilterPipe,
     AlertComponentComponent,
-    AlertDirectiveDirective,
+    AlertDirective,
     LoginComponent,
   ],
   imports: [
