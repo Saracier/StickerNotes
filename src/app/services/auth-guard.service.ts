@@ -33,7 +33,8 @@ export class AuthGuardService implements CanActivateChild {
   }
 
   toggleLoggedIn(email: string, password: string) {
-    if (localStorage.getItem('userData') && this.isLoggedIn === false) {
+    const wasAlreadyLoggedIn = this.checkIfHasAlreadyLogedIn();
+    if (wasAlreadyLoggedIn && this.isLoggedIn === false) {
       this.loginService.setLoginStatus(true);
       return;
     }
@@ -64,7 +65,7 @@ export class AuthGuardService implements CanActivateChild {
   }
 
   handleError(errorRes: HttpErrorResponse) {
-    alert('invalid data');
+    // alert('invalid data');
     const errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
@@ -79,6 +80,9 @@ export class AuthGuardService implements CanActivateChild {
     expiresIn: number
   ) {
     const user = { email, userId, token, expirationDate: expiresIn };
+    if (!user.email) {
+      return;
+    }
     localStorage.setItem('userData', JSON.stringify(user));
     this.loginService.setLoginStatus(true);
   }

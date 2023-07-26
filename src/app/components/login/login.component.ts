@@ -60,8 +60,15 @@ export class LoginComponent implements OnInit {
       this.loginForm.value.email,
       this.loginForm.value.password
     );
+    setTimeout(() => {
+      console.log('this.isLoggedIn', this.isLoggedIn);
+      if (!this.isLoggedIn) {
+        this.showErrorMessage('invalid passoword or email');
+        return;
+      }
+      this.router.navigate(['/']);
+    }, 1000);
     // this.isLoggedIn = this.authGuard.isLoggedIn;
-    this.router.navigate(['/']);
   }
 
   // standalone component. Skończyć go w wolnej chwili
