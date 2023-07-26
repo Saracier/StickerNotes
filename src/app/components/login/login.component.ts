@@ -1,16 +1,22 @@
-import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { AuthGuardService } from '../../services/auth-guard.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertDirectiveDirective } from '../../directives/alert-directive.directive';
 import { AlertComponentComponent } from '../../alert/alert.component';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   isLoggedIn: boolean;
   @ViewChild(AlertDirectiveDirective, { static: false })
   appAlertDirective: AlertDirectiveDirective;
@@ -23,13 +29,16 @@ export class LoginComponent {
   constructor(
     private authGuard: AuthGuardService,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {
-    this.isLoggedIn = authGuard.isLoggedIn;
+    this.loginService.loginStatus.subscribe((status) => {
+      this.isLoggedIn = status;
+    });
   }
 
   ngOnInit() {
-    this.isLoggedIn = Boolean(localStorage.getItem('userData'));
+    // this.isLoggedIn = Boolean(localStorage.getItem('userData'));
     this.loginForm = new FormGroup({
       email: new FormControl('', {
         nonNullable: true,
@@ -43,7 +52,6 @@ export class LoginComponent {
   }
 
   toggleLoggedIn() {
-    console.log('weszlo toggleloggedin');
     if (!this.loginForm.value.email || !this.loginForm.value.password) {
       this.showErrorMessage('invalid passoword or email');
       return;
@@ -52,11 +60,11 @@ export class LoginComponent {
       this.loginForm.value.email,
       this.loginForm.value.password
     );
-    console.log('weszlo toggleloggedin 5 linijek dalej');
-    this.isLoggedIn = this.authGuard.isLoggedIn;
+    // this.isLoggedIn = this.authGuard.isLoggedIn;
     this.router.navigate(['/']);
   }
 
+  // standalone component. Skończyć go w wolnej chwili
   private showErrorMessage(message: string) {
     const alertFactoryResolver =
       this.componentFactoryResolver.resolveComponentFactory(
