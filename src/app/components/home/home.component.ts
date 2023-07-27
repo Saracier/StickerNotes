@@ -20,6 +20,20 @@ export class HomeComponent {
     });
   }
 
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  // get isLoggedIn(): boolean {
+  //   return this.loginService.checkIfIsAlreadyLoggedIn();
+  // }
+
   LogOut() {
     this.authGuard.LogOut();
   }

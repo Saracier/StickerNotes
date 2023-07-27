@@ -4,13 +4,13 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { AuthGuardService } from '../../services/auth-guard.service';
+import { AuthGuardService } from '../services/auth-guard.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertDirective } from '../../directives/alert.directive';
-import { AlertComponentComponent } from '../../alert/alert.component';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { AlertDirective } from '../directives/alert.directive';
+import { AlertComponentComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-login',
@@ -23,11 +23,6 @@ export class LoginComponent implements OnInit {
   appAlertDirective: AlertDirective;
   private closeDynamicComponentSub: Subscription;
 
-  loginForm: FormGroup<{
-    email: FormControl<string>;
-    password: FormControl<string>;
-  }>;
-
   constructor(
     private authGuard: AuthGuardService,
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -38,6 +33,11 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = status;
     });
   }
+
+  loginForm: FormGroup<{
+    email: FormControl<string>;
+    password: FormControl<string>;
+  }>;
 
   ngOnInit() {
     // this.isLoggedIn = Boolean(localStorage.getItem('userData'));
@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
       this.loginForm.value.password
     );
     setTimeout(() => {
-      console.log('this.isLoggedIn', this.isLoggedIn);
       if (!this.isLoggedIn) {
         this.showErrorMessage('Invalid passoword or email');
         return;

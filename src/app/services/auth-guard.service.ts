@@ -27,6 +27,10 @@ export class AuthGuardService implements CanActivateChild {
     });
   }
 
+  get isLogged() {
+    return !!localStorage.getItem('userData');
+  }
+
   LogOut() {
     localStorage.removeItem('userData');
     this.loginService.setLoginStatus(false);
@@ -39,30 +43,41 @@ export class AuthGuardService implements CanActivateChild {
       return;
     }
     this.http
-      .post(
+      .post<IRes>(
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7DVQvn0G9g3uhJBkKhVAyBPHP0c67JCE',
         { email: email, password: password, returnSecureToken: true }
       )
-      .pipe(
-        catchError(this.handleError)
-        // tap((resData: any) => {
-        //   this.handleAuthentication(
-        //     resData.email,
-        //     resData.localId,
-        //     resData.idToken,
-        //     +resData.expiresIn
-        //   );
-        // })
-      )
-      .subscribe((res: any) =>
+      // .pipe(
+      //   catchError(this.handleError)
+      //   // tap((resData: any) => {
+      //   //   this.handleAuthentication(
+      //   //     resData.email,
+      //   //     resData.localId,
+      //   //     resData.idToken,
+      //   //     +resData.expiresIn
+      //   //   );
+      //   // })
+      // )
+      .subscribe((res) => {
+        // .subscribe((res: Observable<IRes> | Promise<IRes> | IRes) => {
+        if (!res) return;
+        // if(res.hasOwnProperty('email')) return
+        // if ('name' in res) return;
         this.handleAuthentication(
           res.email,
           res.localId,
           res.idToken,
           +res.expiresIn
-        )
-      );
+        );
+      });
   }
+
+  // interface IRes {
+  //   email: string;
+  //   localId: string;
+  //   idToken: string;
+  //   expiresIn: string;
+  // }
 
   handleError(errorRes: HttpErrorResponse) {
     // alert('invalid data');
@@ -113,6 +128,12 @@ export class AuthGuardService implements CanActivateChild {
     this.route.navigate(['/login']);
     return false;
   }
+}
+interface IRes {
+  email: string;
+  localId: string;
+  idToken: string;
+  expiresIn: string;
 }
 
 // constructor(

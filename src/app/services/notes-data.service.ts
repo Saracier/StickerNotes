@@ -25,6 +25,13 @@ export class NotesDataService {
     });
   }
 
+  // handleServerRes() {
+  //   this.httpService.fetchNotesFromBackend.subscribe(res => {
+  //     this.addNewNote(res);
+  //   }
+  //     ))
+  // }
+
   onDeleteSingleNote(deleteObject: { id: number }) {
     const numberInArray = this.notes.findIndex((element) => {
       return element.id === Number(deleteObject.id);

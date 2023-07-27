@@ -28,30 +28,36 @@ export class HttpMethodsService {
 
   fetchNotesFromBackend() {
     const helperArray: { id: number; title: string; text: string }[] = [];
-    return this.http
-      .get<{ [key: string]: { id: number; title: string; text: string } }>(
-        'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
-      )
-      .pipe(
-        map(
-          (responeData: {
-            [key: string]: { id: number; title: string; text: string };
-          }) => {
-            for (const key in responeData) helperArray.push(responeData[key]);
-            return helperArray;
-          }
+    return (
+      this.http
+        .get<{ [key: string]: { id: number; title: string; text: string } }>(
+          'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
         )
-      )
-      .subscribe((responseData) => {
-        this.NotesDataService.notes = [];
-        responseData.forEach((element) =>
-          this.NotesDataService.addNewNote(
-            element.id,
-            element.title,
-            element.text
+        .pipe(
+          map(
+            (responeData: {
+              [key: string]: { id: number; title: string; text: string };
+            }) => {
+              for (const key in responeData) helperArray.push(responeData[key]);
+              return helperArray;
+            }
           )
-        );
-      });
+        )
+
+        /*
+      [{id, title, text}]
+      */
+        .subscribe((responseData) => {
+          this.NotesDataService.notes = [];
+          responseData.forEach((element) =>
+            this.NotesDataService.addNewNote(
+              element.id,
+              element.title,
+              element.text
+            )
+          );
+        })
+    );
   }
 
   async deletePosts() {

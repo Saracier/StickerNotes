@@ -8,10 +8,14 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { EditNoteComponent } from './components/edit-note/edit-note.component';
 import { ContactFormTdComponent } from './components/contact-form-td/contact-form-td.component';
 import { ContactFormRComponent } from './components/contact-form-r/contact-form-r.component';
-import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginModule),
+    // component: LoginComponent
+  },
   {
     path: '',
     component: HomeComponent,
