@@ -18,8 +18,8 @@ import { ContactFormRComponent } from './components/contact-form-r/contact-form-
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AlertComponentComponent } from './alert/alert.component';
-import { AlertDirective } from './directives/alert.directive';
+// import { AlertComponentComponent } from './alert/alert.component';
+// import { AlertDirective } from './directives/alert.directive';
 // import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
@@ -36,8 +36,7 @@ import { AlertDirective } from './directives/alert.directive';
     ContactFormRComponent,
     ShortenPipe,
     FilterPipe,
-    AlertComponentComponent,
-    AlertDirective,
+    // AlertComponentComponent,
     // LoginComponent,
   ],
   imports: [

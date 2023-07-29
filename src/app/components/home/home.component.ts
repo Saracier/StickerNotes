@@ -8,16 +8,17 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  isLoggedIn: boolean;
+  isLoggedIn: boolean = this.isLoggedInFn;
+  // isLoggedIn: boolean;
   failedToLogIn = false;
 
   constructor(
     private authGuard: AuthGuardService,
     private loginService: LoginService
   ) {
-    this.loginService.loginStatus.subscribe((status) => {
-      this.isLoggedIn = status;
-    });
+    // this.loginService.loginStatus.subscribe((status) => {
+    //   this.isLoggedIn = status;
+    // });
   }
 
   //
@@ -30,9 +31,10 @@ export class HomeComponent {
   //
   //
   //
-  // get isLoggedIn(): boolean {
-  //   return this.loginService.checkIfIsAlreadyLoggedIn();
-  // }
+  get isLoggedInFn(): boolean {
+    console.log('in home component login has been checked');
+    return this.authGuard.checkIfIsLogedIn;
+  }
 
   LogOut() {
     this.authGuard.LogOut();

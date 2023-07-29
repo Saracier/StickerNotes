@@ -15,32 +15,34 @@ import { LoginService } from './login.service';
   providedIn: 'root',
 })
 export class AuthGuardService implements CanActivateChild {
-  isLoggedIn = false;
+  // isLoggedIn = false;
+  isLoggedIn: boolean = this.checkIfIsLogedIn;
 
   constructor(
     private route: Router,
-    private http: HttpClient,
-    private loginService: LoginService
+    private http: HttpClient // private loginService: LoginService
   ) {
-    this.loginService.loginStatus.subscribe((status) => {
-      this.isLoggedIn = status;
-    });
-  }
-
-  get isLogged() {
-    return !!localStorage.getItem('userData');
+    // this.loginService.loginStatus.subscribe((status) => {
+    //   this.isLoggedIn = status;
+    // });
   }
 
   LogOut() {
-    localStorage.removeItem('userData');
-    this.loginService.setLoginStatus(false);
+    // localStorage.removeItem('userData');
+    document.cookie = 'email= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'expiresIn= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    // this.loginService.setLoginStatus(false);
+    // this.isLoggedIn = this.checkIfIsLogedIn;
   }
 
-  toggleLoggedIn(email: string, password: string) {
-    const wasAlreadyLoggedIn = this.checkIfHasAlreadyLogedIn();
+  async toggleLoggedIn(email: string, password: string): Promise<void | IRes> {
+    // async toggleLoggedIn(email: string, password: string) {
+    const wasAlreadyLoggedIn = this.checkIfIsLogedIn;
     if (wasAlreadyLoggedIn && this.isLoggedIn === false) {
-      this.loginService.setLoginStatus(true);
-      return;
+      // this.loginService.setLoginStatus(true);
+      // return;
     }
     this.http
       .post<IRes>(
@@ -59,25 +61,17 @@ export class AuthGuardService implements CanActivateChild {
       //   // })
       // )
       .subscribe((res) => {
-        // .subscribe((res: Observable<IRes> | Promise<IRes> | IRes) => {
+        console.log('res', res);
         if (!res) return;
-        // if(res.hasOwnProperty('email')) return
-        // if ('name' in res) return;
         this.handleAuthentication(
           res.email,
           res.localId,
           res.idToken,
           +res.expiresIn
         );
+        return res;
       });
   }
-
-  // interface IRes {
-  //   email: string;
-  //   localId: string;
-  //   idToken: string;
-  //   expiresIn: string;
-  // }
 
   handleError(errorRes: HttpErrorResponse) {
     // alert('invalid data');
@@ -98,30 +92,48 @@ export class AuthGuardService implements CanActivateChild {
     if (!user.email) {
       return;
     }
-    localStorage.setItem('userData', JSON.stringify(user));
-    this.loginService.setLoginStatus(true);
+    // localStorage.setItem('userData', JSON.stringify(user));
+    document.cookie = `email=${email}`;
+    document.cookie = `userId=${userId}`;
+    document.cookie = `token=${token}`;
+    document.cookie = `expiresIn=${expiresIn}`;
+
+    // this.loginService.setLoginStatus(true);
   }
 
-  checkIfHasAlreadyLogedIn() {
-    const dataInStorage = localStorage.getItem('userData');
-    if (!dataInStorage) {
-      return false;
+  get checkIfIsLogedIn() {
+    console.log('sth has checked is is loged in');
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf('userId') == 0) {
+        console.log(
+          'has returned',
+          Boolean(c.substring('userId'.length + 1, c.length))
+        );
+        return Boolean(c.substring('userId'.length + 1, c.length));
+      }
     }
-    return Boolean(JSON.parse(dataInStorage).userId);
+    console.log('Has false returned in the end');
+    return false;
   }
 
   canActivateChild(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const wasAlreadyLoggedIn = this.checkIfHasAlreadyLogedIn();
+    const wasAlreadyLoggedIn = this.checkIfIsLogedIn;
     // const dataInStorage = localStorage.getItem('userData');
     if (!wasAlreadyLoggedIn) {
       this.route.navigate(['/login']);
       return false;
     }
     // const isUserId = Boolean(JSON.parse(dataInStorage).userId);
-    this.loginService.setLoginStatus(wasAlreadyLoggedIn);
+    // this.loginService.setLoginStatus(wasAlreadyLoggedIn);
     if (this.isLoggedIn) {
       return true;
     }
