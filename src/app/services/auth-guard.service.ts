@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { LoginService } from './login.service';
+import { IResponseFirebase } from '../iresponse-firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -37,15 +38,18 @@ export class AuthGuardService implements CanActivateChild {
     // this.isLoggedIn = this.checkIfIsLogedIn;
   }
 
-  async toggleLoggedIn(email: string, password: string): Promise<void | IRes> {
+  async toggleLoggedIn(
+    email: string,
+    password: string
+  ): Promise<void | IResponseFirebase> {
     // async toggleLoggedIn(email: string, password: string) {
     const wasAlreadyLoggedIn = this.checkIfIsLogedIn;
     if (wasAlreadyLoggedIn && this.isLoggedIn === false) {
       // this.loginService.setLoginStatus(true);
-      // return;
+      return;
     }
     this.http
-      .post<IRes>(
+      .post<IResponseFirebase>(
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7DVQvn0G9g3uhJBkKhVAyBPHP0c67JCE',
         { email: email, password: password, returnSecureToken: true }
       )
@@ -140,12 +144,6 @@ export class AuthGuardService implements CanActivateChild {
     this.route.navigate(['/login']);
     return false;
   }
-}
-interface IRes {
-  email: string;
-  localId: string;
-  idToken: string;
-  expiresIn: string;
 }
 
 // constructor(
