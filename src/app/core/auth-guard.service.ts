@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { LoginService } from './login.service';
-import { IResponseFirebase } from '../iresponse-firebase';
+import { IResponseFirebase } from '../interfaces/iresponse-firebase';
 
 @Injectable({
   providedIn: 'root',

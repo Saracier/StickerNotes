@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { AllNotesComponent } from './components/all-notes/all-notes.component';
+import { AllNotesComponent } from './containers/all-notes/all-notes.component';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { AuthGuardService } from './services/auth-guard.service';
+import { AuthGuardService } from './core/auth-guard.service';
 import { EditNoteComponent } from './components/edit-note/edit-note.component';
 import { ContactFormTdComponent } from './components/contact-form-td/contact-form-td.component';
 import { ContactFormRComponent } from './components/contact-form-r/contact-form-r.component';
@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
-      import('./login/login.module').then((m) => m.LoginModule),
+      import('./containers/login/login.module').then((m) => m.LoginModule),
     // component: LoginComponent
   },
   {

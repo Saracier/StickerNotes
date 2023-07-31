@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AlertDirective } from '../directives/alert.directive';
-import { AlertComponentComponent } from '../alert/alert.component';
+import { AlertDirective } from '../../shared/directives/alert.directive';
+import { AlertComponentComponent } from '../../shared/alert/alert.component';
 
 @NgModule({
   declarations: [LoginComponent, AlertDirective, AlertComponentComponent],

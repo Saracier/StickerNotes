@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NotesDataService } from '../services/notes-data.service';
+import { NotesDataService } from '../core/notes-data.service';
 import { map } from 'rxjs/operators';
 
 @Injectable({

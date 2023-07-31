@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NotesArray } from '../notes-array';
-import { DeletedNotesService } from '../services/deleted-notes.service';
+import { NotesArray } from '../interfaces/notes-array';
+import { DeletedNotesService } from './deleted-notes.service';
 
 @Injectable({
   providedIn: 'root',

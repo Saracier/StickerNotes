@@ -4,13 +4,13 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { AuthGuardService } from '../services/auth-guard.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { AlertDirective } from '../directives/alert.directive';
-import { AlertComponentComponent } from '../alert/alert.component';
+import { AlertComponentComponent } from '../../shared/alert/alert.component';
+import { LoginService } from 'src/app/core/login.service';
+import { AuthGuardService } from 'src/app/core/auth-guard.service';
+import { AlertDirective } from 'src/app/shared/directives/alert.directive';
 
 @Component({
   selector: 'app-login',

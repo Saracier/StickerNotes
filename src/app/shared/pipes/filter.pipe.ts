@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { NotesArray } from '../notes-array';
+import { NotesArray } from '../../interfaces/notes-array';
 
 @Pipe({
   name: 'filter',
