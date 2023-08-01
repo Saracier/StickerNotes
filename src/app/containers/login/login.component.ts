@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AlertComponentComponent } from '../../shared/alert/alert.component';
-import { LoginService } from 'src/app/core/login.service';
+import { AuthService } from 'src/app/core/auth.service';
 import { AuthGuardService } from 'src/app/core/auth-guard.service';
 import { AlertDirective } from 'src/app/shared/directives/alert.directive';
 
@@ -18,7 +18,7 @@ import { AlertDirective } from 'src/app/shared/directives/alert.directive';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  isLoggedIn: boolean = this.loginService.loginStatus;
+  isLoggedIn: boolean = this.AuthService.loginStatus;
   // isLoggedIn: boolean;
   @ViewChild(AlertDirective, { static: false })
   appAlertDirective: AlertDirective;
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     private authGuard: AuthGuardService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private router: Router,
-    private loginService: LoginService
+    private AuthService: AuthService
   ) {
     // this.loginService.loginStatus.subscribe((status) => {
     //   this.isLoggedIn = status;
@@ -92,13 +92,15 @@ export class LoginComponent implements OnInit {
     // });
 
     setTimeout(() => {
+      console.log("this.AuthService.loginStatus",this.AuthService.loginStatus)
+      console.log("this.isLoggedIn",this.isLoggedIn)
       if (!this.isLoggedIn) {
         // console.log('error');
         this.showErrorMessage('Invalid passoword or email');
         return;
       }
       this.router.navigate(['/']);
-    }, 1000);
+    }, 2000);
     this.isLoggedIn = this.authGuard.isLoggedIn;
   }
 

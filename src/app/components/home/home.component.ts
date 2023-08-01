@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthGuardService } from '../../core/auth-guard.service';
-import { LoginService } from 'src/app/core/login.service';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,7 @@ export class HomeComponent {
 
   constructor(
     private authGuard: AuthGuardService,
-    private loginService: LoginService
+    private authService: AuthService
   ) {
     // this.loginService.loginStatus.subscribe((status) => {
     //   this.isLoggedIn = status;

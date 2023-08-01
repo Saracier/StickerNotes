@@ -5,7 +5,7 @@ import { AuthGuardService } from './auth-guard.service';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class AuthService {
   constructor(private authGuard: AuthGuardService) {}
 
   // public loginStatus: BehaviorSubject<boolean> = new BehaviorSubject(false);
