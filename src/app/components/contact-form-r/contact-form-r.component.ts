@@ -10,6 +10,7 @@ export class ContactFormRComponent implements OnInit {
   genders = ['male', 'female'];
   forbiddenUsernames = ['Admin', 'Goku', 'Moderator', 'Saracier'];
   signupForm: FormGroup;
+
   ngOnInit() {
     this.signupForm = new FormGroup({
       userData: new FormGroup({

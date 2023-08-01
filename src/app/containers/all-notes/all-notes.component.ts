@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { NotesDataService } from '../../core/notes-data.service';
 import { HttpMethodsService } from '../../core/http-methods.service';
+import { map } from 'rxjs/internal/operators/map';
+import { INote } from 'src/app/interfaces/inote';
 
 @Component({
   selector: 'app-all-notes',
@@ -53,12 +55,35 @@ export class AllNotesComponent implements DoCheck, OnInit {
     this.NotesDataService.onDeleteSingleNote(deleteObject);
   }
 
-  postNotes() {
-    this.HttpMethodsService.postNotesToBackend();
+  async postNotes() {
+    const res = await this.HttpMethodsService.deletePosts();
+    if (res) {
+      this.NotesDataService.notes.forEach((element) => {
+        this.HttpMethodsService.postNotesToBackend(element);
+      });
+    }
   }
 
   fetchNotes() {
-    this.HttpMethodsService.fetchNotesFromBackend();
+    const helperArray: INote[] = [];
+
+    this.HttpMethodsService.fetchNotesFromBackend()
+      .pipe(
+        map((responeData: { [key: string]: INote }) => {
+          for (const key in responeData) helperArray.push(responeData[key]);
+          return helperArray;
+        })
+      )
+      .subscribe((responseData) => {
+        this.NotesDataService.notes = [];
+        responseData.forEach((element) =>
+          this.NotesDataService.addNewNote(
+            element.id,
+            element.title,
+            element.text
+          )
+        );
+      });
   }
 
   //

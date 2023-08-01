@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { NotesArray } from '../interfaces/notes-array';
 import { DeletedNotesService } from './deleted-notes.service';
+import { INote } from '../interfaces/inote';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotesDataService {
   constructor(private deletedNotes: DeletedNotesService) {}
-  notes: NotesArray = [
+  notes: INote[] = [
     {
       id: 456456,
       title: 'Hello World My Wonderfoul place',

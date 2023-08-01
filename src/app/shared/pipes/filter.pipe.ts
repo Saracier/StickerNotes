@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { NotesArray } from '../../interfaces/notes-array';
+import { INote } from 'src/app/interfaces/inote';
 
 @Pipe({
   name: 'filter',
@@ -7,10 +7,10 @@ import { NotesArray } from '../../interfaces/notes-array';
 })
 export class FilterPipe implements PipeTransform {
   transform(
-    value: NotesArray,
+    value: INote[],
     filterString: string,
     propName: 'title' | 'text'
-  ): NotesArray {
+  ): INote[] {
     if (value.length === 0) return value;
     const resultArray = [];
     for (const item of value) {

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { INote } from 'src/app/interfaces/inote';
 
 @Component({
   selector: 'app-note',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./note.component.scss'],
 })
 export class NoteComponent {
-  @Input() note: { id: number; title: string; text: string } = {
+  @Input() note: INote = {
     id: NaN,
     title: '',
     text: '',
