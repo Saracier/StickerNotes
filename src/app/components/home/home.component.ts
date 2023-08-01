@@ -33,10 +33,10 @@ export class HomeComponent {
   //
   get isLoggedInFn(): boolean {
     console.log('in home component login has been checked');
-    return this.authGuard.checkIfIsLogedIn;
+    return this.authService.checkIfIsLogedIn;
   }
 
   LogOut() {
-    this.authGuard.LogOut();
+    this.authService.LogOut();
   }
 }

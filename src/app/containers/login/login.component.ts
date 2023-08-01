@@ -18,7 +18,7 @@ import { AlertDirective } from 'src/app/shared/directives/alert.directive';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  isLoggedIn: boolean = this.AuthService.loginStatus;
+  isLoggedIn: boolean = this.authService.loginStatus;
   // isLoggedIn: boolean;
   @ViewChild(AlertDirective, { static: false })
   appAlertDirective: AlertDirective;
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     private authGuard: AuthGuardService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private router: Router,
-    private AuthService: AuthService
+    private authService: AuthService,
   ) {
     // this.loginService.loginStatus.subscribe((status) => {
     //   this.isLoggedIn = status;
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       this.showErrorMessage('invalid passoword or email');
       return;
     }
-    this.authGuard.toggleLoggedIn(
+    this.authService.toggleLoggedIn(
       this.loginForm.value.email,
       this.loginForm.value.password
     );
@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
     // });
 
     setTimeout(() => {
-      console.log("this.AuthService.loginStatus",this.AuthService.loginStatus)
+      console.log("this.AuthService.loginStatus",this.authService.loginStatus)
       console.log("this.isLoggedIn",this.isLoggedIn)
       if (!this.isLoggedIn) {
         // console.log('error');
