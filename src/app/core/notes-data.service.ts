@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { DeletedNotesService } from './deleted-notes.service';
 import { INote } from '../interfaces/inote';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotesDataService {
-  constructor(private deletedNotes: DeletedNotesService) {}
   notes: INote[] = [
     {
       id: 456456,
@@ -40,6 +38,6 @@ export class NotesDataService {
       throw new Error(
         'something went wrong. Index of note for delete exeeded array'
       );
-    this.deletedNotes.catchOldNote(this.notes.splice(numberInArray, 1));
+    this.notes.splice(numberInArray, 1);
   }
 }

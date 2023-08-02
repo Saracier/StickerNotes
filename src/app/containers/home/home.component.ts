@@ -8,8 +8,7 @@ import { AuthService } from 'src/app/core/auth.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  isLoggedIn: boolean = this.isLoggedInFn;
-  // isLoggedIn: boolean;
+  isLoggedIn: boolean = this.authService.checkIfIsLogedIn;
   failedToLogIn = false;
 
   constructor(

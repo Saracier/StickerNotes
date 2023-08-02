@@ -29,7 +29,6 @@ export class AuthGuardService implements CanActivateChild {
     // });
   }
 
-
   canActivateChild(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

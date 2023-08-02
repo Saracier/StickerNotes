@@ -16,7 +16,9 @@ export class HttpMethodsService {
   async postNotesToBackend(element: INote) {
     this.http
       .post(
-        'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json',
+        // tap, map, mergeMap, switchMap, delay, exhaustMap (różnice switchMap, exhaustMap), filter, catchError, first, take, takeUntil, skip,
+        // skipWhile, of, zip, forkJoin, combineLatest, distinctUntilChanged, startWith, withLatestFrom, share
+        'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes-backup.json',
         element
       )
       .subscribe((responseData) => console.log(responseData));
@@ -27,7 +29,7 @@ export class HttpMethodsService {
   //     this.NotesDataService.notes.forEach((element) => {
   //       this.http
   //         .post(
-  //           'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json',
+  //           'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes-backup.json',
   //           element
   //         )
   //         .subscribe((responseData) => console.log(responseData));
@@ -37,7 +39,7 @@ export class HttpMethodsService {
 
   fetchNotesFromBackend() {
     return this.http.get<{ [key: string]: INote }>(
-      'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
+      'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes-backup.json'
     );
   }
   // fetchNotesFromBackend() {
@@ -45,7 +47,7 @@ export class HttpMethodsService {
   //   return (
   //     this.http
   //       .get<{ [key: string]: { id: number; title: string; text: string } }>(
-  //         'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
+  //         'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes-backup.json'
   //       )
   //       .pipe(
   //         map(
@@ -77,7 +79,7 @@ export class HttpMethodsService {
   async deletePosts() {
     return this.http
       .delete(
-        'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
+        'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes-backup.json'
       )
       .subscribe((resData) => console.log(resData));
   }
