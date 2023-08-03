@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NotesDataService } from '../core/notes-data.service';
+import { NotesDataService } from './notes-data.service';
 import { map } from 'rxjs/operators';
-import { INote } from '../interfaces/inote';
+import { INote } from '../../interfaces/inote';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class HttpMethodsService {
   //     this.NotesDataService.notes.forEach((element) => {
   //       this.http
   //         .post(
-  //           'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json',
+  //           'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes-backup.json',
   //           element
   //         )
   //         .subscribe((responseData) => console.log(responseData));
@@ -47,7 +47,7 @@ export class HttpMethodsService {
   //   return (
   //     this.http
   //       .get<{ [key: string]: { id: number; title: string; text: string } }>(
-  //         'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
+  //         'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes-backup.json'
   //       )
   //       .pipe(
   //         map(
