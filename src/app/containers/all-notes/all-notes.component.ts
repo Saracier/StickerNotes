@@ -2,8 +2,8 @@ import {
   Component,
   ViewChild,
   ElementRef,
-  DoCheck,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
 import { NotesDataService } from '../../core/services/notes-data.service';
 import { HttpMethodsService } from '../../core/services/http-methods.service';
@@ -15,13 +15,16 @@ import { INote } from 'src/app/interfaces/inote';
   templateUrl: './all-notes.component.html',
   styleUrls: ['./all-notes.component.scss'],
 })
-export class AllNotesComponent implements DoCheck, OnInit {
+export class AllNotesComponent implements OnInit, OnDestroy {
   filteredStatus = '';
   textInputValue = '';
   @ViewChild('titleInputValue', { static: true })
   titleInputValue: ElementRef<HTMLInputElement>;
   inputContainsSomething = false;
-  notes = this.NotesDataService.notes;
+  noteSubscripction = this.NotesDataService.notes.subscribe(
+    (notesFromSub) => (this.notes = notesFromSub)
+  );
+  notes: INote[];
 
   constructor(
     private NotesDataService: NotesDataService,
@@ -58,7 +61,7 @@ export class AllNotesComponent implements DoCheck, OnInit {
   async postNotes() {
     const res = await this.HttpMethodsService.deletePosts();
     if (res) {
-      this.NotesDataService.notes.forEach((element) => {
+      this.NotesDataService.notes.getValue().forEach((element) => {
         this.HttpMethodsService.postNotesToBackend(element);
       });
     }
@@ -75,7 +78,7 @@ export class AllNotesComponent implements DoCheck, OnInit {
         })
       )
       .subscribe((responseData) => {
-        this.NotesDataService.notes = [];
+        this.NotesDataService.notes.next([]);
         responseData.forEach((element) =>
           this.NotesDataService.addNewNote(
             element.id,
@@ -86,16 +89,7 @@ export class AllNotesComponent implements DoCheck, OnInit {
       });
   }
 
-  //
-  //
-  //
-  //
-  //
-  //To poniżej mi się nie podoba, ale nie wiem jak to zmienić
-  //
-  //
-  //
-  ngDoCheck() {
-    this.notes = this.NotesDataService.notes;
+  ngOnDestroy() {
+    this.noteSubscripction.unsubscribe;
   }
 }

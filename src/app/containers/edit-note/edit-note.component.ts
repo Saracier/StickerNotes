@@ -21,7 +21,7 @@ export class EditNoteComponent implements OnInit {
 
   ngOnInit() {
     this.searchedId = this.route.snapshot.params['id'];
-    const notes = this.NotesDataService.notes;
+    const notes = this.NotesDataService.notes.getValue();
     this.noteNumberInArray = notes.findIndex((element) => {
       return element.id === Number(this.searchedId);
     });
@@ -31,7 +31,7 @@ export class EditNoteComponent implements OnInit {
       );
     }
     const temporarySingleNote =
-      this.NotesDataService.notes[this.noteNumberInArray];
+      this.NotesDataService.notes.getValue()[this.noteNumberInArray];
     this.singleNote = { ...temporarySingleNote };
 
     this.inputContainsSomething = Boolean(
@@ -47,7 +47,9 @@ export class EditNoteComponent implements OnInit {
 
   saveEditedNote() {
     if (!this.inputContainsSomething) return;
-    this.NotesDataService.notes[this.noteNumberInArray] = this.singleNote;
+    const notesFromDataServiceCopy = this.NotesDataService.notes.getValue();
+    notesFromDataServiceCopy[this.noteNumberInArray] = this.singleNote;
+    this.NotesDataService.notes.next(notesFromDataServiceCopy);
     this.router.navigate(['/allNotes']);
   }
 }
