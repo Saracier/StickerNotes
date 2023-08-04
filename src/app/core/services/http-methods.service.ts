@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NotesDataService } from '../core/notes-data.service';
+import { NotesDataService } from './notes-data.service';
 import { map } from 'rxjs/operators';
-import { INote } from '../interfaces/inote';
+import { INote } from '../../interfaces/inote';
 
 @Injectable({
   providedIn: 'root',

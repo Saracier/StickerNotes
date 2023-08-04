@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthGuardService } from '../../core/auth-guard.service';
-import { AuthService } from 'src/app/core/auth.service';
+import { AuthGuardService } from '../../core/guards/auth-guard.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-home',

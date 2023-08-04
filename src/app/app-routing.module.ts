@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './containers/home/home.component';
 import { AllNotesComponent } from './containers/all-notes/all-notes.component';
 import { FormsModule } from '@angular/forms';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { AuthGuardService } from './core/auth-guard.service';
-import { EditNoteComponent } from './components/edit-note/edit-note.component';
-import { ContactFormTdComponent } from './components/contact-form-td/contact-form-td.component';
-import { ContactFormRComponent } from './components/contact-form-r/contact-form-r.component';
+import { NotFoundComponent } from './containers/not-found/not-found.component';
+import { AuthGuardService } from './core/guards/auth-guard.service';
+import { EditNoteComponent } from './containers/edit-note/edit-note.component';
+import { ContactFormTdComponent } from './containers/contact-form-td/contact-form-td.component';
+import { ContactFormRComponent } from './containers/contact-form-r/contact-form-r.component';
 
 const routes: Routes = [
   {

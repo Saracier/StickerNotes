@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
-import { AuthGuardService } from './auth-guard.service';
-import { IResponseFirebase } from '../interfaces/iresponse-firebase';
+import { AuthGuardService } from '../guards/auth-guard.service';
+import { IResponseFirebase } from '../../interfaces/iresponse-firebase';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

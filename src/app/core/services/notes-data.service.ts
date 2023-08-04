@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DeletedNotesService } from './deleted-notes.service';
-import { INote } from '../interfaces/inote';
+import { INote } from '../../interfaces/inote';
 
 @Injectable({
   providedIn: 'root',
