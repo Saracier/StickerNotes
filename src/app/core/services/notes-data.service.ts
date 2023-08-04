@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
-import { INote } from '../../interfaces/inote';
-=======
-<<<<<<<< HEAD:src/app/core/notes-data.service.ts
-import { INote } from '../interfaces/inote';
-========
+
 import { DeletedNotesService } from './deleted-notes.service';
 import { INote } from '../../interfaces/inote';
->>>>>>>> newFeature:src/app/core/services/notes-data.service.ts
->>>>>>> newFeature
 
 @Injectable({
   providedIn: 'root',

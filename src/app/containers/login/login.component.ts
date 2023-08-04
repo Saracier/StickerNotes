@@ -97,13 +97,8 @@ export class LoginComponent implements OnInit {
     // });
 
     // setTimeout(() => {
-<<<<<<< HEAD
-    //   console.log('this.AuthService.loginStatus', this.authService.loginStatus);
-    //   console.log('this.isLoggedIn', this.isLoggedIn);
-=======
     //   console.log("this.AuthService.loginStatus",this.authService.loginStatus)
     //   console.log("this.isLoggedIn",this.isLoggedIn)
->>>>>>> newFeature
     //   if (!this.isLoggedIn) {
     //     // console.log('error');
     //     this.showErrorMessage('Invalid passoword or email');

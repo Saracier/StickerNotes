@@ -9,10 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class HomeComponent {
   isLoggedIn: boolean = this.authService.checkIfIsLogedIn;
-<<<<<<< HEAD
-=======
   // isLoggedIn: boolean;
->>>>>>> newFeature
   failedToLogIn = false;
 
   constructor(

@@ -29,11 +29,7 @@ export class HttpMethodsService {
   //     this.NotesDataService.notes.forEach((element) => {
   //       this.http
   //         .post(
-<<<<<<< HEAD
-  //           'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes-backup.json',
-=======
   //           'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json',
->>>>>>> newFeature
   //           element
   //         )
   //         .subscribe((responseData) => console.log(responseData));
@@ -51,11 +47,7 @@ export class HttpMethodsService {
   //   return (
   //     this.http
   //       .get<{ [key: string]: { id: number; title: string; text: string } }>(
-<<<<<<< HEAD
-  //         'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes-backup.json'
-=======
   //         'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
->>>>>>> newFeature
   //       )
   //       .pipe(
   //         map(
