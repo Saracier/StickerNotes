@@ -6,16 +6,18 @@
     align-self: flex-end;
     justify-self: flex-end;
 
+    a,
     button {
+      display: block;
       height: 50px;
       width: 100px;
       margin: 20px;
+      background-color: white;
       border-radius: 5px;
-
-      a {
-        text-decoration: none;
-        color: #111213;
-      }
+      text-decoration: none;
+      color: #111213;
+      text-align: center;
+      line-height: 50px;
     }
   }
   .home__container--status {
@@ -29,17 +31,29 @@
     cursor: pointer;
     justify-content: space-evenly;
 
-    button {
-      border-radius: 5px;
-    }
     a {
+      display: block;
+      border-radius: 5px;
+      background-color: white;
       padding: 10px;
       text-decoration: none;
       color: #111213;
+      margin: auto;
     }
   }
 
   .hidden {
     display: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .home__container {
+    .home__nav {
+      a:nth-child(even) {
+        display: none;
+        background-color: red;
+      }
+    }
   }
 }

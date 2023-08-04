@@ -18,7 +18,7 @@ import { ContactFormRComponent } from './containers/contact-form-r/contact-form-
 import { ShortenPipe } from './shared/pipes/shorten.pipe';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoggingInterceptor } from './core/logging.interceptor';
+import { LoggingInterceptor } from './core/interceptors/logging.interceptor';
 // import { AlertComponentComponent } from './alert/alert.component';
 // import { AlertDirective } from './directives/alert.directive';
 // import { LoginComponent } from './components/login/login.component';

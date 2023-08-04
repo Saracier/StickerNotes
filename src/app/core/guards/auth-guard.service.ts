@@ -33,16 +33,16 @@ export class AuthGuardService implements CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const wasAlreadyLoggedIn = this.authService.checkIfIsLogedIn;
-    // const dataInStorage = localStorage.getItem('userData');
-    if (!wasAlreadyLoggedIn) {
-      this.route.navigate(['/login']);
-      return false;
-    }
-    console.log('autguard linijka kolo 42 this.isLoggedIn', this.isLoggedIn);
+    // const wasAlreadyLoggedIn = this.authService.checkIfIsLogedIn;
+    // console.log('wasAlreadyLoggedIn', wasAlreadyLoggedIn);
+    // // const dataInStorage = localStorage.getItem('userData');
+    // if (!wasAlreadyLoggedIn) {
+    //   this.route.navigate(['/login']);
+    //   return false;
+    // }
     // const isUserId = Boolean(JSON.parse(dataInStorage).userId);
     // this.loginService.setLoginStatus(wasAlreadyLoggedIn);
-    if (this.isLoggedIn) {
+    if (this.authService.checkIfIsLogedIn) {
       return true;
     }
     this.route.navigate(['/login']);

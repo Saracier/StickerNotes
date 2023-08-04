@@ -47,3 +47,9 @@
     height: 100%;
   }
 }
+
+@media (max-width: 940px) {
+  .notes__main {
+    justify-content: center;
+  }
+}

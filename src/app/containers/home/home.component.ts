@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthGuardService } from '../../core/auth-guard.service';
-import { AuthService } from 'src/app/core/auth.service';
+import { AuthGuardService } from '../../core/guards/auth-guard.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +9,10 @@ import { AuthService } from 'src/app/core/auth.service';
 })
 export class HomeComponent {
   isLoggedIn: boolean = this.authService.checkIfIsLogedIn;
+<<<<<<< HEAD
+=======
+  // isLoggedIn: boolean;
+>>>>>>> newFeature
   failedToLogIn = false;
 
   constructor(
@@ -30,6 +34,7 @@ export class HomeComponent {
   //
   //
   //
+
   get isLoggedInFn(): boolean {
     console.log('in home component login has been checked');
     return this.authService.checkIfIsLogedIn;

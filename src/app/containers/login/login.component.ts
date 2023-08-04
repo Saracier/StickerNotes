@@ -8,8 +8,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AlertComponentComponent } from '../../shared/alert/alert.component';
-import { AuthService } from 'src/app/core/auth.service';
-import { AuthGuardService } from 'src/app/core/auth-guard.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthGuardService } from 'src/app/core/guards/auth-guard.service';
 import { AlertDirective } from 'src/app/shared/directives/alert.directive';
 
 @Component({
@@ -97,8 +97,13 @@ export class LoginComponent implements OnInit {
     // });
 
     // setTimeout(() => {
+<<<<<<< HEAD
     //   console.log('this.AuthService.loginStatus', this.authService.loginStatus);
     //   console.log('this.isLoggedIn', this.isLoggedIn);
+=======
+    //   console.log("this.AuthService.loginStatus",this.authService.loginStatus)
+    //   console.log("this.isLoggedIn",this.isLoggedIn)
+>>>>>>> newFeature
     //   if (!this.isLoggedIn) {
     //     // console.log('error');
     //     this.showErrorMessage('Invalid passoword or email');

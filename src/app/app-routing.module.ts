@@ -4,7 +4,11 @@ import { HomeComponent } from './containers/home/home.component';
 import { AllNotesComponent } from './containers/all-notes/all-notes.component';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
+<<<<<<< HEAD
 import { AuthGuardService } from './core/auth-guard.service';
+=======
+import { AuthGuardService } from './core/guards/auth-guard.service';
+>>>>>>> newFeature
 import { EditNoteComponent } from './containers/edit-note/edit-note.component';
 import { ContactFormTdComponent } from './containers/contact-form-td/contact-form-td.component';
 import { ContactFormRComponent } from './containers/contact-form-r/contact-form-r.component';

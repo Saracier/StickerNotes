@@ -5,8 +5,8 @@ import {
   DoCheck,
   OnInit,
 } from '@angular/core';
-import { NotesDataService } from '../../core/notes-data.service';
-import { HttpMethodsService } from '../../core/http-methods.service';
+import { NotesDataService } from '../../core/services/notes-data.service';
+import { HttpMethodsService } from '../../core/services/http-methods.service';
 import { map } from 'rxjs/internal/operators/map';
 import { INote } from 'src/app/interfaces/inote';
 
