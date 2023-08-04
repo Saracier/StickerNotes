@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AlertComponentComponent } from '../../shared/alert/alert.component';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { AuthGuardService } from 'src/app/core/guards/auth-guard.service';
 import { AlertDirective } from 'src/app/shared/directives/alert.directive';
 
 @Component({
@@ -18,21 +17,15 @@ import { AlertDirective } from 'src/app/shared/directives/alert.directive';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  // isLoggedIn: boolean;
   @ViewChild(AlertDirective, { static: false })
   appAlertDirective: AlertDirective;
   private closeDynamicComponentSub: Subscription;
 
   constructor(
-    private authGuard: AuthGuardService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private router: Router,
     private authService: AuthService
-  ) {
-    // this.loginService.loginStatus.subscribe((status) => {
-    //   this.isLoggedIn = status;
-    // });
-  }
+  ) {}
 
   loginForm: FormGroup<{
     email: FormControl<string>;
@@ -40,7 +33,6 @@ export class LoginComponent implements OnInit {
   }>;
 
   ngOnInit() {
-    // this.isLoggedIn = Boolean(localStorage.getItem('userData'));
     this.loginForm = new FormGroup({
       email: new FormControl('', {
         nonNullable: true,
@@ -68,45 +60,6 @@ export class LoginComponent implements OnInit {
           this.showErrorMessage('Invalid password or email');
         },
       });
-
-    // const res = await this.authGuard.toggleLoggedIn(
-    //   this.loginForm.value.email,
-    //   this.loginForm.value.password
-    // );
-
-    // console.log('has started testing res', res);
-    // if (res instanceof Error) {
-    //   this.showErrorMessage('Invalid passoword or email');
-    //   return;
-    // }
-    // console.log('res && res.idToken', res && res.idToken);
-    // if (res && res.idToken) {
-    //   this.router.navigate(['/']);
-    // }
-
-    // .then((res) => {
-    //   console.log('has started testing res', res);
-    //   if (res instanceof Error) {
-    //     this.showErrorMessage('Invalid passoword or email');
-    //     return;
-    //   }
-    //   console.log('res && res.idToken', res && res.idToken);
-    //   if (res && res.idToken) {
-    //     this.router.navigate(['/']);
-    //   }
-    // });
-
-    // setTimeout(() => {
-    //   console.log("this.AuthService.loginStatus",this.authService.loginStatus)
-    //   console.log("this.isLoggedIn",this.isLoggedIn)
-    //   if (!this.isLoggedIn) {
-    //     // console.log('error');
-    //     this.showErrorMessage('Invalid passoword or email');
-    //     return;
-    //   }
-    //   this.router.navigate(['/']);
-    // }, 2000);
-    // this.isLoggedIn = this.authGuard.isLoggedIn;
   }
 
   private showErrorMessage(message: string) {
@@ -114,15 +67,12 @@ export class LoginComponent implements OnInit {
       this.componentFactoryResolver.resolveComponentFactory(
         AlertComponentComponent
       );
-    console.log('alertFactoryResolver', alertFactoryResolver);
 
     const hostViewContainerRef = this.appAlertDirective.viewContainerRef;
     hostViewContainerRef.clear();
-    console.log('hostViewContainerRef', hostViewContainerRef);
 
     const componentRef =
       hostViewContainerRef.createComponent(alertFactoryResolver);
-    console.log('componentRef', componentRef);
 
     componentRef.instance.message = message;
     this.closeDynamicComponentSub = componentRef.instance.closeEvent.subscribe(

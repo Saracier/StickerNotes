@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthGuardService } from '../../core/guards/auth-guard.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -8,32 +7,9 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  isLoggedIn: boolean = this.authService.checkIfIsLogedIn;
-  // isLoggedIn: boolean;
-  failedToLogIn = false;
-
-  constructor(
-    private authGuard: AuthGuardService,
-    private authService: AuthService
-  ) {
-    // this.loginService.loginStatus.subscribe((status) => {
-    //   this.isLoggedIn = status;
-    // });
-  }
-
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
+  constructor(private authService: AuthService) {}
 
   get isLoggedInFn(): boolean {
-    console.log('in home component login has been checked');
     return this.authService.checkIfIsLogedIn;
   }
 

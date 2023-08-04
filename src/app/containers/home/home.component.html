@@ -1,27 +1,3 @@
-<!-- <div class="home__container">
-  <div class="home__container--loginout" *ngIf="isLoggedIn">
-    <button (click)="LogOut()">Log out</button>
-  </div>
-  <div class="home__container--loginout" *ngIf="!isLoggedIn">
-    <a [routerLink]="['/login']">Log In</a>
-  </div>
-
-  <p class="home__container--status" [ngClass]="{ hidden: isLoggedIn }">
-    You are <b>{{ isLoggedIn ? "" : "NOT" }}</b> logged in
-  </p>
-  <div class="home__nav">
-    <a [routerLink]="['/allNotes']">Go to your notes</a>
-
-    <a [routerLink]="['/contacttd']">Template-driven contact form</a>
-
-    <a [routerLink]="['/contactr']">Reactive contact form</a>
-  </div>
-</div>
-<hr />
-<div [ngClass]="{ hidden: !isLoggedIn }">
-  <router-outlet></router-outlet>
-</div> -->
-
 <div class="home__container">
   <div class="home__container--loginout" *ngIf="isLoggedInFn">
     <button (click)="LogOut()" type="button">Log out</button>

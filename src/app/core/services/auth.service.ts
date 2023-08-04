@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 import { IResponseFirebase } from '../../interfaces/iresponse-firebase';
 import { HttpClient } from '@angular/common/http';
@@ -13,17 +13,13 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   LogOut() {
-    // localStorage.removeItem('userData');
     document.cookie = 'email= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
     document.cookie = 'userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
     document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
     document.cookie = 'expiresIn= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
-    // this.loginService.setLoginStatus(false);
-    // this.isLoggedIn = this.checkIfIsLogedIn;
   }
 
   get checkIfIsLogedIn() {
-    console.log('sth has checked is is loged in');
     const cookiesArray = document.cookie.split(';');
     for (let i = 0; i < cookiesArray.length; i++) {
       let singleCookie = cookiesArray[i];
@@ -31,18 +27,11 @@ export class AuthService {
         singleCookie = singleCookie.substring(1);
       }
       if (singleCookie.indexOf('userId') == 0) {
-        console.log(
-          'has returned',
-          Boolean(
-            singleCookie.substring('userId'.length + 1, singleCookie.length)
-          )
-        );
         return Boolean(
           singleCookie.substring('userId'.length + 1, singleCookie.length)
         );
       }
     }
-    console.log('Has false returned in the end');
     return false;
   }
 
@@ -56,70 +45,36 @@ export class AuthService {
     if (!user.email) {
       return;
     }
-    // localStorage.setItem('userData', JSON.stringify(user));
     document.cookie = `email=${email}`;
     document.cookie = `userId=${userId}`;
     document.cookie = `token=${token}`;
     document.cookie = `expiresIn=${expiresIn}`;
-
-    // this.loginService.setLoginStatus(true);
   }
 
   toggleLoggedIn(
     email: string,
     password: string
   ): Observable<IResponseFirebase | null> {
-    // async toggleLoggedIn(email: string, password: string) {
     const wasAlreadyLoggedIn = this.checkIfIsLogedIn;
     if (wasAlreadyLoggedIn && this.checkIfIsLogedIn === false) {
-      // this.loginService.setLoginStatus(true);
       return of(null);
     }
-    return (
-      this.http
-        .post<IResponseFirebase>(
-          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7DVQvn0G9g3uhJBkKhVAyBPHP0c67JCE',
-          { email: email, password: password, returnSecureToken: true }
-        )
-        // .pipe(
-        //   catchError(this.handleError)
-        //   // tap((resData: any) => {
-        //   //   this.handleAuthentication(
-        //   //     resData.email,
-        //   //     resData.localId,
-        //   //     resData.idToken,
-        //   //     +resData.expiresIn
-        //   //   );
-        //   // })
-        // )
-        .pipe(
-          tap((res) => {
-            if (!res) return;
-            this.handleAuthentication(
-              res.email,
-              res.localId,
-              res.idToken,
-              +res.expiresIn
-            );
-          })
-        )
-    );
-    // .subscribe((res) => {
-    //   console.log('res', res);
-    //   if (!res) return;
-    //   this.handleAuthentication(
-    //     res.email,
-    //     res.localId,
-    //     res.idToken,
-    //     +res.expiresIn
-    //   );
-    //   return res;
-    // });
+    return this.http
+      .post<IResponseFirebase>(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7DVQvn0G9g3uhJBkKhVAyBPHP0c67JCE',
+        { email: email, password: password, returnSecureToken: true }
+      )
+
+      .pipe(
+        tap((res) => {
+          if (!res) return;
+          this.handleAuthentication(
+            res.email,
+            res.localId,
+            res.idToken,
+            +res.expiresIn
+          );
+        })
+      );
   }
-
-  // public loginStatus: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-  // setLoginStatus(status: boolean) {
-  //   this.loginStatus.next(status);
-  // }
 }
