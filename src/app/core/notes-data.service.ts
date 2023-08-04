@@ -40,6 +40,6 @@ export class NotesDataService {
       throw new Error(
         'something went wrong. Index of note for delete exeeded array'
       );
-    this.deletedNotes.catchOldNote(this.notes.splice(numberInArray, 1));
+    this.notes.splice(numberInArray, 1);
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { AuthGuardService } from './auth-guard.service';
 import { IResponseFirebase } from '../interfaces/iresponse-firebase';
 import { HttpClient } from '@angular/common/http';
@@ -10,8 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   public loginStatus: boolean = this.checkIfIsLogedIn;
 
-  constructor( private http: HttpClient,) {}
-
+  constructor(private http: HttpClient) {}
 
   LogOut() {
     // localStorage.removeItem('userData');
@@ -63,47 +62,59 @@ export class AuthService {
     // this.loginService.setLoginStatus(true);
   }
 
-  async toggleLoggedIn(
+  toggleLoggedIn(
     email: string,
     password: string
-  ): Promise<void | IResponseFirebase> {
+  ): Observable<IResponseFirebase | null> {
     // async toggleLoggedIn(email: string, password: string) {
     const wasAlreadyLoggedIn = this.checkIfIsLogedIn;
-    if (wasAlreadyLoggedIn && this.loginStatus === false) {
+    if (wasAlreadyLoggedIn && this.checkIfIsLogedIn === false) {
       // this.loginService.setLoginStatus(true);
-      return;
+      return of(null);
     }
-    this.http
-      .post<IResponseFirebase>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7DVQvn0G9g3uhJBkKhVAyBPHP0c67JCE',
-        { email: email, password: password, returnSecureToken: true }
-      )
-      // .pipe(
-      //   catchError(this.handleError)
-      //   // tap((resData: any) => {
-      //   //   this.handleAuthentication(
-      //   //     resData.email,
-      //   //     resData.localId,
-      //   //     resData.idToken,
-      //   //     +resData.expiresIn
-      //   //   );
-      //   // })
-      // )
-      .subscribe((res) => {
-        console.log('res', res);
-        if (!res) return;
-        this.handleAuthentication(
-          res.email,
-          res.localId,
-          res.idToken,
-          +res.expiresIn
-        );
-        return res;
-      });
+    return (
+      this.http
+        .post<IResponseFirebase>(
+          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7DVQvn0G9g3uhJBkKhVAyBPHP0c67JCE',
+          { email: email, password: password, returnSecureToken: true }
+        )
+        // .pipe(
+        //   catchError(this.handleError)
+        //   // tap((resData: any) => {
+        //   //   this.handleAuthentication(
+        //   //     resData.email,
+        //   //     resData.localId,
+        //   //     resData.idToken,
+        //   //     +resData.expiresIn
+        //   //   );
+        //   // })
+        // )
+        .pipe(
+          tap((res) => {
+            if (!res) return;
+            this.handleAuthentication(
+              res.email,
+              res.localId,
+              res.idToken,
+              +res.expiresIn
+            );
+          })
+        )
+    );
+    // .subscribe((res) => {
+    //   console.log('res', res);
+    //   if (!res) return;
+    //   this.handleAuthentication(
+    //     res.email,
+    //     res.localId,
+    //     res.idToken,
+    //     +res.expiresIn
+    //   );
+    //   return res;
+    // });
   }
 
   // public loginStatus: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
 
   // setLoginStatus(status: boolean) {
   //   this.loginStatus.next(status);
