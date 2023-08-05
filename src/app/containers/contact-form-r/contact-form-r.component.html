@@ -62,7 +62,7 @@
       <span *ngIf="!signupForm.valid && signupForm.touched"
         >Form is invalid!</span
       >
-      <button type="submit">submit</button>
+      <button type="submit" [disabled]="!signupForm.valid">submit</button>
     </div>
   </form>
 </div>
