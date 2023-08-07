@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
-
 import { IResponseFirebase } from '../../interfaces/iresponse-firebase';
 import { HttpClient } from '@angular/common/http';
 
@@ -64,7 +63,6 @@ export class AuthService {
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7DVQvn0G9g3uhJBkKhVAyBPHP0c67JCE',
         { email: email, password: password, returnSecureToken: true }
       )
-
       .pipe(
         tap((res) => {
           if (!res) return;

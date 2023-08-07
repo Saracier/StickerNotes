@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -15,15 +14,13 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuardService implements CanActivateChild {
   isLoggedIn: boolean = this.authService.checkIfIsLogedIn;
 
-  constructor(
-    private route: Router,
-    private http: HttpClient, // private loginService: LoginService
-    private authService: AuthService
-  ) {}
+  constructor(private route: Router, private authService: AuthService) {}
 
   canActivateChild(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _route: ActivatedRouteSnapshot,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.checkIfIsLogedIn) {
       return true;

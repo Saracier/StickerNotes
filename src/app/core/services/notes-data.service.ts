@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class NotesDataService {
-  notes = new BehaviorSubject([
+  mockNotes = [
     {
       id: 456456,
       title: 'Hello World My Wonderfoul place',
@@ -14,7 +14,8 @@ export class NotesDataService {
     },
     { id: 23423424, title: 'Hello Giedi Prime', text: 'I love Dune books' },
     { id: 6363688, title: 'Hello There', text: 'General Kenobi' },
-  ]);
+  ];
+  notes = new BehaviorSubject(this.mockNotes);
 
   addNewNote(id: number, title: string, text: string) {
     const currentNotes: INote[] = this.notes.getValue();

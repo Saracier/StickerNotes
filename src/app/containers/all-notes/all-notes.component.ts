@@ -9,6 +9,7 @@ import { NotesDataService } from '../../core/services/notes-data.service';
 import { HttpMethodsService } from '../../core/services/http-methods.service';
 import { map } from 'rxjs/internal/operators/map';
 import { INote } from 'src/app/interfaces/inote';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-all-notes',
@@ -21,6 +22,7 @@ export class AllNotesComponent implements OnInit, OnDestroy {
   @ViewChild('titleInputValue', { static: true })
   titleInputValue: ElementRef<HTMLInputElement>;
   inputContainsSomething = false;
+  httpMethodsSubscription: Subscription;
   noteSubscripction = this.NotesDataService.notes.subscribe(
     (notesFromSub) => (this.notes = notesFromSub)
   );
@@ -46,7 +48,6 @@ export class AllNotesComponent implements OnInit, OnDestroy {
       this.titleInputValue.nativeElement.value,
       this.textInputValue
     );
-
     this.textInputValue = '';
   }
 
@@ -70,26 +71,28 @@ export class AllNotesComponent implements OnInit, OnDestroy {
   fetchNotes() {
     const helperArray: INote[] = [];
 
-    this.HttpMethodsService.fetchNotesFromBackend()
-      .pipe(
-        map((responeData: { [key: string]: INote }) => {
-          for (const key in responeData) helperArray.push(responeData[key]);
-          return helperArray;
-        })
-      )
-      .subscribe((responseData) => {
-        this.NotesDataService.notes.next([]);
-        responseData.forEach((element) =>
-          this.NotesDataService.addNewNote(
-            element.id,
-            element.title,
-            element.text
-          )
-        );
-      });
+    this.httpMethodsSubscription =
+      this.HttpMethodsService.fetchNotesFromBackend()
+        .pipe(
+          map((responeData: { [key: string]: INote }) => {
+            for (const key in responeData) helperArray.push(responeData[key]);
+            return helperArray;
+          })
+        )
+        .subscribe((responseData) => {
+          this.NotesDataService.notes.next([]);
+          responseData.forEach((element) =>
+            this.NotesDataService.addNewNote(
+              element.id,
+              element.title,
+              element.text
+            )
+          );
+        });
   }
 
   ngOnDestroy() {
     this.noteSubscripction.unsubscribe;
+    this.httpMethodsSubscription.unsubscribe;
   }
 }

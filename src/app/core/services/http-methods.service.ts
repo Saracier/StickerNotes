@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NotesDataService } from './notes-data.service';
 import { INote } from '../../interfaces/inote';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HttpMethodsService {
-  constructor(
-    private http: HttpClient,
-    private NotesDataService: NotesDataService
-  ) {}
+export class HttpMethodsService implements OnDestroy {
+  constructor(private http: HttpClient) {}
+  postNotesToBackendSub: Subscription;
+  fetchNotesFromBackendSub: Subscription;
+  deletePostsSub: Subscription;
 
   async postNotesToBackend(element: INote) {
     this.http
@@ -33,5 +33,11 @@ export class HttpMethodsService {
         'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
       )
       .subscribe((resData) => console.log(resData));
+  }
+
+  ngOnDestroy() {
+    this.postNotesToBackendSub.unsubscribe();
+    this.fetchNotesFromBackendSub.unsubscribe();
+    this.deletePostsSub.unsubscribe();
   }
 }

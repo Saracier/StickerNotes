@@ -1,6 +1,7 @@
 import {
   Component,
   ComponentFactoryResolver,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -16,10 +17,11 @@ import { AlertDirective } from 'src/app/shared/directives/alert.directive';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   @ViewChild(AlertDirective, { static: false })
   appAlertDirective: AlertDirective;
   private closeDynamicComponentSub: Subscription;
+  private toggleLoggedInSub: Subscription;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -50,12 +52,14 @@ export class LoginComponent implements OnInit {
       this.showErrorMessage('invalid passoword or email');
       return;
     }
-    this.authService
+    this.toggleLoggedInSub = this.authService
       .toggleLoggedIn(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe({
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         next: (data) => {
           this.router.navigate(['/']);
         },
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         error: (err) => {
           this.showErrorMessage('Invalid password or email');
         },
@@ -81,5 +85,9 @@ export class LoginComponent implements OnInit {
         hostViewContainerRef.clear();
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.toggleLoggedInSub.unsubscribe();
   }
 }
