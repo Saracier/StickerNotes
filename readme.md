@@ -1,9 +1,11 @@
 # StickyNotes
 
-Welcome to my app!
-It was created to showcase my skills in Angular. In this app, you can keep notes, similar to sticky notes. After logging in (you will find the login and password on the login screen), you can add, upload, fetch, and edit selected notes.
-I have used Firebase as the backend.
-I hope you will have as much fun using it as I did when I was making it!
+Welcome to my app!  
+It was created to showcase my skills in Angular. In this app, you can keep notes, similar to sticky notes. After logging in (you will find the login and password on the login screen), you can add, upload, fetch, and edit selected notes.  
+I have used Firebase as the backend.  
+I hope you will have as much fun using it as I did when I was making it!  
+  
+[You can find live version here](https://sticky-notes-lac.vercel.app/)
 
 ## Version
 
