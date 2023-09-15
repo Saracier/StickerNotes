@@ -89,5 +89,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.toggleLoggedInSub.unsubscribe();
+    this.closeDynamicComponentSub.unsubscribe();
   }
 }

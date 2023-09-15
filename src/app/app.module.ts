@@ -19,6 +19,7 @@ import { ShortenPipe } from './shared/pipes/shorten.pipe';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoggingInterceptor } from './core/interceptors/logging.interceptor';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { LoggingInterceptor } from './core/interceptors/logging.interceptor';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
