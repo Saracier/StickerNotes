@@ -48,12 +48,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   async toggleLoggedIn() {
-    if (!this.loginForm.value.email || !this.loginForm.value.password) {
+    if (!this.loginForm.value.email?.trim() || !this.loginForm.value.password) {
       this.showErrorMessage('invalid passoword or email');
       return;
     }
     this.toggleLoggedInSub = this.authService
-      .toggleLoggedIn(this.loginForm.value.email, this.loginForm.value.password)
+      .toggleLoggedIn(
+        this.loginForm.value.email.trim(),
+        this.loginForm.value.password
+      )
       .subscribe({
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         next: (data) => {
