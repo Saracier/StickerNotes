@@ -16,6 +16,7 @@
   </div>
 </div>
 <hr />
-<div [ngClass]="{ hidden: !isLoggedInFn }">
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>
+<div *ngIf="shouldShowHelloMessage" class="invitation">
+  What would you like to do?
 </div>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivationEnd, NavigationEnd, Router } from '@angular/router';
+import { Action } from 'rxjs/internal/scheduler/Action';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -7,7 +9,17 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor(private authService: AuthService) {}
+  shouldShowHelloMessage = false;
+  constructor(private authService: AuthService, private router: Router) {
+    router.events.subscribe((event) => {
+      if (!(event instanceof NavigationEnd)) return;
+      if (event.url === '/') {
+        this.shouldShowHelloMessage = true;
+      } else {
+        this.shouldShowHelloMessage = false;
+      }
+    });
+  }
 
   get isLoggedInFn(): boolean {
     return this.authService.checkIfIsLogedIn;

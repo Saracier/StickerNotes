@@ -54,10 +54,8 @@ export class AuthService {
     email: string,
     password: string
   ): Observable<IResponseFirebase | null> {
-    console.log('weszło w togglelogedin');
     const wasAlreadyLoggedIn = this.checkIfIsLogedIn;
     if (wasAlreadyLoggedIn && this.checkIfIsLogedIn === false) {
-      console.log('weszło w togglelogedin linijka 61');
       return of(null);
     }
     return this.http
