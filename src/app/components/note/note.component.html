@@ -4,7 +4,11 @@
     <span>{{ note.text }}</span>
   </div>
   <div class="note__buttons">
-    <button (click)="deleteHandler()">Delete</button>
-    <button (click)="goToEditComponent()">Edit</button>
+    <button mat-raised-button color="warn" (click)="deleteHandler()">
+      Delete
+    </button>
+    <button mat-raised-button color="primary" (click)="goToEditComponent()">
+      Edit
+    </button>
   </div>
 </div>

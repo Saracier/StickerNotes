@@ -55,7 +55,7 @@ export class AuthService {
     password: string
   ): Observable<IResponseFirebase | null> {
     const wasAlreadyLoggedIn = this.checkIfIsLogedIn;
-    if (wasAlreadyLoggedIn && this.checkIfIsLogedIn === false) {
+    if (wasAlreadyLoggedIn) {
       return of(null);
     }
     return this.http

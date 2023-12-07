@@ -21,8 +21,6 @@
     input {
       margin: 0 0 10px 0;
       border-radius: 5px;
-      width: 300px;
-      padding: 10px;
     }
   }
 }
@@ -36,12 +34,17 @@
   }
 }
 
+.notes__filter {
+  display: flex;
+  justify-content: center;
+}
+
 .notes__main {
   display: flex;
   flex-wrap: wrap;
 
   .notes {
-    border: 1px solid white;
+    border: 1px solid #d1d1d1;
     width: 300px;
     margin: 5px;
     height: 100%;

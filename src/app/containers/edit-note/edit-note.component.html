@@ -1,22 +1,37 @@
 <div class="edit">
   <div class="edit__inner">
-    <label for="title">title</label>
-    <input
-      name="title"
-      type="text"
-      (keyup.enter)="saveEditedNote()"
-      (input)="evaluateInput()"
-      [(ngModel)]="singleNote.title"
-    />
-    <label for="text">text</label>
-    <input
-      name="text"
-      type="text"
-      [(ngModel)]="singleNote.text"
-      (keyup.enter)="saveEditedNote()"
-      (input)="evaluateInput()"
-    />
-    <button [disabled]="!inputContainsSomething" (click)="saveEditedNote()">
+    <mat-form-field [style.width.px]="250">
+      <mat-label for="title">title</mat-label>
+      <input
+        matInput
+        name="title"
+        type="text"
+        (keyup.enter)="saveEditedNote()"
+        (input)="evaluateInput()"
+        [(ngModel)]="singleNote.title"
+      />
+    </mat-form-field>
+    <mat-form-field [style.width.px]="250">
+      <mat-label for="text">text</mat-label>
+      <textarea
+        matInput
+        name="text"
+        type="text"
+        [(ngModel)]="singleNote.text"
+        (keyup.enter)="saveEditedNote()"
+        (input)="evaluateInput()"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="10"
+      ></textarea>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!inputContainsSomething"
+      (click)="saveEditedNote()"
+    >
       Save note
     </button>
   </div>

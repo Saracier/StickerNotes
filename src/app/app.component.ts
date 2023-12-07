@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ComponentFactoryResolver,
   OnDestroy,
@@ -14,19 +13,12 @@ import { Subscription } from 'rxjs/internal/Subscription';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnDestroy, AfterViewInit {
+export class AppComponent implements OnDestroy {
   @ViewChild(AlertDirective, { static: false })
   appAlertDirective: AlertDirective;
   private closeDynamicComponentSub: Subscription;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
-
-  ngAfterViewInit() {
-    this.showMessage(
-      `This app has been made strictly to show the capabilities of Angular code.
-      It has terrible UI / UX, but it was never meant to be pretty. If you would like to watch something less terryfiyng, I would welcome you to another project: https://github.com/Saracier/PersonalBudgeter`
-    );
-  }
 
   private showMessage(message: string) {
     const alertFactoryResolver =

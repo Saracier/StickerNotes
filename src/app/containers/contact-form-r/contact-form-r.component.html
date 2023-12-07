@@ -3,66 +3,91 @@
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <div id="userTicker">
       <div formGroupName="userData">
-        <label for="username"> Name : </label>
-        <input
-          id="username"
-          type="text"
-          name="username"
-          formControlName="username"
-        />
-        <span
-          *ngIf="
-            !signupForm.get('userData.username')?.valid &&
-            signupForm.get('userData.username')?.touched
-          "
-          >Please enter a valid username!</span
-        >
-        <div *ngFor="let gender of genders">
-          <label>
-            <input
-              type="radio"
-              name="gender"
-              [value]="gender"
-              formControlName="gender"
-            />
-            {{ gender }}
-          </label>
-        </div>
-        <label for="Email"> Email :</label>
-        <input id="Email" type="text" name="email" formControlName="email" />
+        <mat-form-field>
+          <mat-label> Name : </mat-label>
+          <input
+            matInput
+            id="username"
+            type="text"
+            name="username"
+            formControlName="username"
+          />
+          <mat-error
+            *ngIf="
+              !signupForm.get('userData.username')?.valid &&
+              signupForm.get('userData.username')?.touched
+            "
+            >Please enter a valid username!</mat-error
+          >
+        </mat-form-field>
+        <mat-radio-group formControlName="gender">
+          <mat-radio-button name="gender" value="male" color="primary">
+            Male</mat-radio-button
+          >
+          <mat-radio-button name="gender" value="female" color="primary">
+            Female</mat-radio-button
+          >
+          <br />
+        </mat-radio-group>
+
+        <mat-form-field>
+          <mat-label> Email :</mat-label>
+          <input
+            matInput
+            id="Email"
+            type="text"
+            name="email"
+            formControlName="emailaa"
+          />
+          <mat-error
+            *ngIf="
+              !signupForm.get('email')?.valid &&
+              signupForm.get('email')?.touched
+            "
+            >Please enter a valid email!</mat-error
+          >
+        </mat-form-field>
       </div>
-      <span
-        *ngIf="
-          !signupForm.get('email')?.valid && signupForm.get('email')?.touched
-        "
-        >Please enter a valid email!</span
+      <mat-form-field>
+        <mat-label for="marketing"> Do you agree to spam marketing?</mat-label>
+        <mat-select id="marketing" name="marketing" formControlName="marketing">
+          <mat-option value="yes">Yes</mat-option>
+          <mat-option value="ofc">Of course</mat-option>
+          <mat-option value="fine">Fine</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label for="message"> Message :</mat-label>
+        <textarea
+          matInput
+          id="message"
+          type="textarea"
+          name="message"
+          formControlName="message"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="5"
+          cdkAutosizeMaxRows="10"
+        ></textarea>
+        <mat-error
+          *ngIf="
+            !signupForm.get('message')?.valid &&
+            signupForm.get('message')?.touched
+          "
+          >Please enter a valid message!</mat-error
+        >
+      </mat-form-field>
+      <mat-error *ngIf="!signupForm.valid && signupForm.touched"
+        >Form is invalid!</mat-error
       >
-      <label for="marketing">
-        Do you agree to recieve merketing spam from us? :</label
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!signupForm.valid"
       >
-      <select id="marketing" name="marketing" formControlName="marketing">
-        <option value="yes">Yes</option>
-        <option value="ofc">Of course</option>
-        <option value="fine">Fine</option>
-      </select>
-      <label for="message"> Message :</label>
-      <textarea
-        id="message"
-        type="textarea"
-        name="message"
-        formControlName="message"
-      ></textarea>
-      <span
-        *ngIf="
-          !signupForm.get('message')?.valid &&
-          signupForm.get('message')?.touched
-        "
-        >Please enter a valid message!</span
-      >
-      <span *ngIf="!signupForm.valid && signupForm.touched"
-        >Form is invalid!</span
-      >
-      <button type="submit" [disabled]="!signupForm.valid">submit</button>
+        submit
+      </button>
     </div>
   </form>
 </div>

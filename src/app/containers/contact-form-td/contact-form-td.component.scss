@@ -17,18 +17,11 @@
     margin: 5px;
   }
 
-  button {
-    margin: 20px;
-    padding: 5px;
+  mat-radio-group {
+    margin-bottom: 10px;
   }
 }
 
 form input.ng-invalid.ng-touched {
   border: 1px solid red;
-}
-
-textarea {
-  min-width: 100px;
-  max-width: 350px;
-  max-height: 300px;
 }

@@ -2,53 +2,79 @@
   <p>This is a form component maked in Template-Driven approach</p>
   <form (ngSubmit)="onSubmit()" #formTDElement="ngForm">
     <div id="userTicker" ngModelGroup="userSendUsTicket">
-      <label for="username"> Name : </label>
-      <input
-        id="username"
-        type="text"
-        ngModel
-        name="username"
-        minlength="3"
-        required
-      />
-      <div *ngFor="let gender of genders">
-        <label>
-          <input type="radio" name="gender" ngModel [value]="gender" />
-          {{ gender }}
-        </label>
-      </div>
-      <label for="Email"> Email :</label>
-      <input
-        id="Email"
-        type="text"
-        ngModel
-        name="email"
-        required
-        email
-        #emailRef="ngModel"
-      />
-      <span *ngIf="!emailRef.valid && emailRef.touched"
-        >Enter a valid email!</span
+      <mat-form-field>
+        <mat-label> Name : </mat-label>
+        <input
+          matInput
+          id="username"
+          type="text"
+          ngModel
+          name="username"
+          minlength="3"
+          required
+        />
+      </mat-form-field>
+
+      <mat-radio-group name="gender">
+        <mat-radio-button value="male" color="primary">Male</mat-radio-button>
+        <mat-radio-button value="female" color="primary">
+          Female</mat-radio-button
+        >
+      </mat-radio-group>
+      <mat-form-field>
+        <mat-label> Email :</mat-label>
+        <input
+          matInput
+          id="Email"
+          type="text"
+          ngModel
+          name="email"
+          required
+          email
+          #emailRef="ngModel"
+        />
+        <mat-error *ngIf="!emailRef.valid && emailRef.touched"
+          >Enter a valid email!</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label for="marketing"> Do you agree to spam marketing?</mat-label>
+        <mat-select
+          id="marketing"
+          ngModel
+          name="marketing"
+          [ngModel]="defaultAnswer"
+        >
+          <mat-option value="yes">Yes</mat-option>
+          <mat-option value="ofc">Of course</mat-option>
+          <mat-option value="fine">Fine</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Message :</mat-label>
+        <textarea
+          matInput
+          id="message"
+          type="textarea"
+          ngModel
+          name="message"
+          required
+          [(ngModel)]="messageInput"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="5"
+          cdkAutosizeMaxRows="10"
+        ></textarea>
+      </mat-form-field>
+      <p>Your message is: {{ messageInput }}</p>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!formTDElement.valid"
       >
-      <label for="marketing">
-        Do you agree to recieve merketing spam from us? :</label
-      >
-      <select id="marketing" ngModel name="marketing" [ngModel]="defaultAnswer">
-        <option value="yes">Yes</option>
-        <option value="ofc">Of course</option>
-        <option value="fine">Fine</option>
-      </select>
-      <label for="message"> Message :</label>
-      <textarea
-        id="message"
-        type="textarea"
-        ngModel
-        name="message"
-        required
-        [(ngModel)]="messageInput"
-      ></textarea>
-      <p>Your message is {{ messageInput }}</p>
-      <button type="submit" [disabled]="!formTDElement.valid">Submit</button>
+        Submit
+      </button>
     </div>
   </form>
 </div>

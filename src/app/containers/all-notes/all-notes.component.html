@@ -1,26 +1,40 @@
 <div class="notes__new">
   <div class="notes__new--inputs">
     <div>
-      <label for="title">title</label>
-      <input
-        name="title"
-        type="text"
-        (keyup.enter)="addNewNote()"
-        (input)="evaluateInput()"
-        #titleInputValue
-      />
+      <mat-form-field>
+        <mat-label>New Note Title</mat-label>
+        <input
+          matInput
+          name="title"
+          type="text"
+          (keyup.enter)="addNewNote()"
+          (input)="evaluateInput()"
+          #titleInputValue
+      /></mat-form-field>
     </div>
     <div>
-      <label for="text">text</label>
-      <input
-        name="text"
-        type="text"
-        [(ngModel)]="textInputValue"
-        (keyup.enter)="addNewNote()"
-        (input)="evaluateInput()"
-      />
+      <mat-form-field>
+        <mat-label>Text</mat-label>
+        <textarea
+          matInput
+          name="text"
+          type="text"
+          [(ngModel)]="textInputValue"
+          (keyup.enter)="addNewNote()"
+          (input)="evaluateInput()"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="5"
+          cdkAutosizeMaxRows="10"
+        ></textarea>
+      </mat-form-field>
     </div>
-    <button [disabled]="!inputContainsSomething" (click)="addNewNote()">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!inputContainsSomething"
+      (click)="addNewNote()"
+    >
       Add new note
     </button>
   </div>
@@ -28,10 +42,18 @@
 <hr />
 <router-outlet></router-outlet>
 <div class="notes__actions">
-  <button (click)="postNotes()">Save</button>
-  <button (click)="fetchNotes()">Restore</button>
-  <label for="filter">Filter notes</label
-  ><input name="filter" type="text" [(ngModel)]="filteredStatus" />
+  <button mat-raised-button color="primary" (click)="postNotes()">
+    Save Notes
+  </button>
+  <button mat-raised-button color="primary" (click)="fetchNotes()">
+    Fetch Notes
+  </button>
+</div>
+<div class="notes__filter">
+  <mat-form-field>
+    <mat-label for="filter">Filter notes</mat-label
+    ><input matInput name="filter" type="text" [(ngModel)]="filteredStatus" />
+  </mat-form-field>
 </div>
 <div class="notes__main" *ngIf="!(notes[0] === undefined); else nothingToShow">
   <div

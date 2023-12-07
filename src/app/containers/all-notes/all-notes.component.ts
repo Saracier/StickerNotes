@@ -49,6 +49,7 @@ export class AllNotesComponent implements OnInit, OnDestroy {
       this.textInputValue
     );
     this.textInputValue = '';
+    this.titleInputValue.nativeElement.value = '';
   }
 
   evaluateInput() {

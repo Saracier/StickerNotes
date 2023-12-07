@@ -2,6 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta property="og:title" content="StickyNotes" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sticky-notes-lac.vercel.app/" />
+    <meta property="og:image" content="https://placekitten.com/600/600" />
+    <meta
+      property="og:description"
+      content="Trzymaj swoje notatki zawsze pod ręką!"
+    />
     <title>StickyNotes</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,8 +23,23 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
   <body class="mat-typography">
     <app-root></app-root>
   </body>
+  <noscript
+    >Aby korzystać z tej strony internetowej musisz mieć włączoną obsługę
+    JavaScript w przeglądarce. <br />
+    W międzyczasie masz tutaj koteczka:
+    <img src="https://placekitten.com/600/600" alt="słodki koteczek"
+  /></noscript>
 </html>

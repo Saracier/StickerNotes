@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivationEnd, NavigationEnd, Router } from '@angular/router';
-import { Action } from 'rxjs/internal/scheduler/Action';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({

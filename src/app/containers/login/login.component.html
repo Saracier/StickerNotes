@@ -2,18 +2,36 @@
   <p>use email: test@test.pl</p>
   <p>password: password</p>
   <form [formGroup]="loginForm" (ngSubmit)="toggleLoggedIn()">
-    <label for="email">email</label
-    ><input id="email" name="email" type="text" formControlName="email" />
-    <label for="password">password</label
-    ><input
-      id="password"
-      name="password"
-      type="password"
-      formControlName="password"
-      minlenght="6"
-    />
+    <mat-form-field [style.width.px]="250">
+      <mat-label for="email">email</mat-label
+      ><input
+        matInput
+        id="email"
+        name="email"
+        type="text"
+        formControlName="email"
+      />
+    </mat-form-field>
+    <mat-form-field [style.width.px]="250">
+      <mat-label for="password">password</mat-label
+      ><input
+        matInput
+        id="password"
+        name="password"
+        type="password"
+        formControlName="password"
+        minlenght="6"
+      />
+    </mat-form-field>
 
     <ng-template appAlert> </ng-template>
-    <button (click)="toggleLoggedIn()" type="button">Log In</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="toggleLoggedIn()"
+      type="button"
+    >
+      Log In
+    </button>
   </form>
 </div>

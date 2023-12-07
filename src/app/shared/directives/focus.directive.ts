@@ -13,7 +13,7 @@ export class FocusDirective {
   constructor(private elRef: ElementRef, private renderer: Renderer2) {}
 
   @HostBinding('style.background-color') backColor = 'transparent';
-  @HostBinding('style.color') textColor = 'white';
+  @HostBinding('style.color') textColor = '#444';
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @HostListener('mouseenter') mouseIsInside(_eventData: Event) {
@@ -23,6 +23,6 @@ export class FocusDirective {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @HostListener('mouseleave') mouseIsGone(_eventData: Event) {
     this.backColor = 'transparent';
-    this.textColor = 'white';
+    this.textColor = '#444';
   }
 }

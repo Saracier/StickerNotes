@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ContactFormRComponent implements OnInit {
   genders = ['male', 'female'];
-  forbiddenUsernames = ['Admin', 'Goku', 'Moderator', 'Saracier'];
+  forbiddenUsernames = ['Admin', 'Moderator', 'Saracier'];
   signupForm: FormGroup;
 
   ngOnInit() {
@@ -19,7 +19,7 @@ export class ContactFormRComponent implements OnInit {
           this.forbiddenNamesCheck.bind(this),
         ]),
         gender: new FormControl('male'),
-        email: new FormControl(null, [Validators.required, Validators.email]),
+        emailaa: new FormControl(null, [Validators.required, Validators.email]),
       }),
       marketing: new FormControl('yes'),
       message: new FormControl(null, Validators.required),
