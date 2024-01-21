@@ -15,10 +15,10 @@ export class NotesDataService {
     { id: 23423424, title: 'Hello Giedi Prime', text: 'I love Dune books' },
     { id: 6363688, title: 'Hello There', text: 'General Kenobi' },
   ];
-  notes = new BehaviorSubject(this.mockNotes);
+  notes$ = new BehaviorSubject(this.mockNotes);
 
   addNewNote(id: number, title: string, text: string) {
-    const currentNotes: INote[] = this.notes.getValue();
+    const currentNotes: INote[] = this.notes$.getValue();
     const newNotes = [
       ...currentNotes,
       {
@@ -27,11 +27,11 @@ export class NotesDataService {
         text: text,
       },
     ];
-    this.notes.next(newNotes);
+    this.notes$.next(newNotes);
   }
 
   onDeleteSingleNote(deleteObject: { id: number }) {
-    const notesCopy: INote[] = this.notes.getValue();
+    const notesCopy: INote[] = this.notes$.getValue();
     const numberInArray = notesCopy.findIndex((element) => {
       return element.id === Number(deleteObject.id);
     });
@@ -40,6 +40,6 @@ export class NotesDataService {
         'something went wrong. Index of note for delete exeeded array'
       );
     notesCopy.splice(numberInArray, 1);
-    this.notes.next(notesCopy);
+    this.notes$.next(notesCopy);
   }
 }

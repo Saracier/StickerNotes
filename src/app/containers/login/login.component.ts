@@ -20,8 +20,8 @@ import { AlertDirective } from 'src/app/shared/directives/alert.directive';
 export class LoginComponent implements OnInit, OnDestroy {
   @ViewChild(AlertDirective, { static: false })
   appAlertDirective: AlertDirective;
-  private closeDynamicComponentSub: Subscription;
-  private toggleLoggedInSub: Subscription;
+  private closeDynamicComponentSub$: Subscription;
+  private toggleLoggedInSub$: Subscription;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.showErrorMessage('invalid passoword or email');
       return;
     }
-    this.toggleLoggedInSub = this.authService
-      .toggleLoggedIn(
+    this.toggleLoggedInSub$ = this.authService
+      .toggleLoggedIn$(
         this.loginForm.value.email.trim(),
         this.loginForm.value.password
       )
@@ -82,20 +82,20 @@ export class LoginComponent implements OnInit, OnDestroy {
       hostViewContainerRef.createComponent(alertFactoryResolver);
 
     componentRef.instance.message = message;
-    this.closeDynamicComponentSub = componentRef.instance.closeEvent.subscribe(
+    this.closeDynamicComponentSub$ = componentRef.instance.closeEvent.subscribe(
       () => {
-        this.closeDynamicComponentSub.unsubscribe();
+        this.closeDynamicComponentSub$.unsubscribe();
         hostViewContainerRef.clear();
       }
     );
   }
 
   ngOnDestroy() {
-    if (this.toggleLoggedInSub) {
-      this.toggleLoggedInSub.unsubscribe();
+    if (this.toggleLoggedInSub$) {
+      this.toggleLoggedInSub$.unsubscribe();
     }
-    if (this.closeDynamicComponentSub) {
-      this.closeDynamicComponentSub.unsubscribe();
+    if (this.closeDynamicComponentSub$) {
+      this.closeDynamicComponentSub$.unsubscribe();
     }
   }
 }

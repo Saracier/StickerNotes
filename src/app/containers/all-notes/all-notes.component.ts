@@ -22,8 +22,8 @@ export class AllNotesComponent implements OnInit, OnDestroy {
   @ViewChild('titleInputValue', { static: true })
   titleInputValue: ElementRef<HTMLInputElement>;
   inputContainsSomething = false;
-  httpMethodsSubscription: Subscription;
-  noteSubscripction = this.NotesDataService.notes.subscribe(
+  httpMethodsSubscription$: Subscription;
+  noteSubscripction$ = this.NotesDataService.notes$.subscribe(
     (notesFromSub) => (this.notes = notesFromSub)
   );
   notes: INote[];
@@ -63,7 +63,7 @@ export class AllNotesComponent implements OnInit, OnDestroy {
   async postNotes() {
     const res = await this.HttpMethodsService.deletePosts();
     if (res) {
-      this.NotesDataService.notes.getValue().forEach((element) => {
+      this.NotesDataService.notes$.getValue().forEach((element) => {
         this.HttpMethodsService.postNotesToBackend(element);
       });
     }
@@ -72,7 +72,7 @@ export class AllNotesComponent implements OnInit, OnDestroy {
   fetchNotes() {
     const helperArray: INote[] = [];
 
-    this.httpMethodsSubscription =
+    this.httpMethodsSubscription$ =
       this.HttpMethodsService.fetchNotesFromBackend()
         .pipe(
           map((responeData: { [key: string]: INote }) => {
@@ -81,7 +81,7 @@ export class AllNotesComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe((responseData) => {
-          this.NotesDataService.notes.next([]);
+          this.NotesDataService.notes$.next([]);
           responseData.forEach((element) =>
             this.NotesDataService.addNewNote(
               element.id,
@@ -93,7 +93,7 @@ export class AllNotesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.noteSubscripction.unsubscribe;
-    this.httpMethodsSubscription.unsubscribe;
+    this.noteSubscripction$.unsubscribe;
+    this.httpMethodsSubscription$.unsubscribe;
   }
 }

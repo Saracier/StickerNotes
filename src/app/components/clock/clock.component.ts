@@ -13,8 +13,8 @@ export class ClockComponent implements OnInit, OnDestroy {
   hour: string;
   minute: string;
   second: string;
-  firstObsSubscripcion: Subscription;
-  customIntervalObservable = interval(1000);
+  firstObsSubscripcion$: Subscription;
+  customIntervalObservable$ = interval(1000);
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +30,7 @@ export class ClockComponent implements OnInit, OnDestroy {
         this.second = resDate.getSeconds().toString();
       });
 
-    this.firstObsSubscripcion = this.customIntervalObservable.subscribe(
+    this.firstObsSubscripcion$ = this.customIntervalObservable$.subscribe(
       () => {
         this.updateTime();
       },
@@ -44,7 +44,7 @@ export class ClockComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.firstObsSubscripcion.unsubscribe();
+    this.firstObsSubscripcion$.unsubscribe();
   }
 
   updateTime() {

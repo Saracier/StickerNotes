@@ -50,7 +50,7 @@ export class AuthService {
     document.cookie = `expiresIn=${expiresIn}`;
   }
 
-  toggleLoggedIn(
+  toggleLoggedIn$(
     email: string,
     password: string
   ): Observable<IResponseFirebase | null> {
