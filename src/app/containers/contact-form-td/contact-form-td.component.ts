@@ -13,6 +13,7 @@ export class ContactFormTdComponent {
   genders = ['male', 'female'];
 
   onSubmit() {
+    // Using console log is a bad practice, hence due to lack of email server I used it
     console.log(this.formTDElement.value.userSendUsTicket);
     this.formTDElement.reset();
   }

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { INote } from '../../interfaces/inote';
@@ -18,7 +20,13 @@ export class HttpMethodsService implements OnDestroy {
         'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json',
         element
       )
-      .subscribe((responseData) => console.log(responseData));
+      .subscribe({
+        next: (responseData) => {},
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {},
+      });
   }
 
   fetchNotesFromBackend() {
@@ -32,7 +40,13 @@ export class HttpMethodsService implements OnDestroy {
       .delete(
         'https://stickynotes-3befd-default-rtdb.europe-west1.firebasedatabase.app/notes.json'
       )
-      .subscribe((resData) => console.log(resData));
+      .subscribe({
+        next: (responseData) => {},
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {},
+      });
   }
 
   ngOnDestroy() {

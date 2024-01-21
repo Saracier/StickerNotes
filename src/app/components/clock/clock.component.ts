@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscriber } from 'rxjs';
-import { Subscription, Observable } from 'rxjs';
+import { interval } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { responseWorldTimeApi } from 'src/app/interfaces/responseWorldTimeApi';
 
 @Component({
   selector: 'app-clock',
@@ -12,17 +14,22 @@ export class ClockComponent implements OnInit, OnDestroy {
   minute: string;
   second: string;
   firstObsSubscripcion: Subscription;
+  customIntervalObservable = interval(1000);
+
+  constructor(private http: HttpClient) {}
+
   ngOnInit() {
-    fetch('https://worldtimeapi.org/api/timezone/Europe/Warsaw')
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
+    this.http
+      .get<responseWorldTimeApi>(
+        'https://worldtimeapi.org/api/timezone/Europe/Warsaw'
+      )
+      .subscribe((res) => {
         const resDate = new Date(res.datetime);
         this.hour = resDate.getHours().toString();
         this.minute = resDate.getMinutes().toString();
         this.second = resDate.getSeconds().toString();
       });
+
     this.firstObsSubscripcion = this.customIntervalObservable.subscribe(
       () => {
         this.updateTime();
@@ -62,14 +69,4 @@ export class ClockComponent implements OnInit, OnDestroy {
     this.minute = localMinute < 10 ? `0${localMinute}` : localMinute.toString();
     this.hour = localHour < 10 ? `0${localHour}` : localHour.toString();
   }
-
-  customIntervalObservable = Observable.create(
-    (observer: Subscriber<number>) => {
-      let count = 0;
-      setInterval(() => {
-        observer.next(count);
-        count++;
-      }, 1000);
-    }
-  );
 }

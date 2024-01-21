@@ -27,6 +27,7 @@ export class ContactFormRComponent implements OnInit {
   }
 
   onSubmit() {
+    // Using console log is a bad practice, hence due to lack of email server I used it
     console.log(this.signupForm);
     this.signupForm.reset();
   }

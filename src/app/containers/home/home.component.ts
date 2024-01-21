@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class HomeComponent {
   shouldShowHelloMessage = false;
+
   constructor(private authService: AuthService, private router: Router) {
     router.events.subscribe((event) => {
       if (!(event instanceof NavigationEnd)) return;
