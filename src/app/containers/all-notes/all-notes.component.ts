@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { NotesDataService } from '../../core/services/notes-data.service';
 import { HttpMethodsService } from '../../core/services/http-methods.service';
-import { map } from 'rxjs/internal/operators/map';
 import { INote } from 'src/app/interfaces/inote';
 import { Subscription } from 'rxjs';
 
@@ -34,7 +33,13 @@ export class AllNotesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.fetchNotes();
+    console.log('All notes were shared between users on test account. I had disabled backend due to rude notes added by someone. All notes are stored on session, yet if you want to look on the code implementation it is still kept commented')
+    // Here is code to use firebase as backend
+    // Yet due to a fact, that there were backend shared between users
+    // And some notes added by users were rude
+    // I had decided to turn it off
+
+    // this.fetchNotes();
   }
 
   addNewNote() {
@@ -61,35 +66,49 @@ export class AllNotesComponent implements OnInit, OnDestroy {
   }
 
   async postNotes() {
-    const res = await this.HttpMethodsService.deletePosts();
-    if (res) {
-      this.NotesDataService.notes$.getValue().forEach((element) => {
-        this.HttpMethodsService.postNotesToBackend(element);
-      });
-    }
+    alert('All notes were shared between users on test account. I had disabled backend due to rude notes added by someone. All notes are stored on session, yet if you want to look on the code implementation it is still kept commented');
+    // Here is code to use firebase as backend
+    // Yet due to a fact, that there were backend shared between users
+    // And some notes added by users were rude
+    // I had decided to turn it off
+
+
+    // const res = await this.HttpMethodsService.deletePosts();
+    // if (res) {
+    //   this.NotesDataService.notes$.getValue().forEach((element) => {
+    //     this.HttpMethodsService.postNotesToBackend(element);
+    //   });
+    // }
   }
 
   fetchNotes() {
-    const helperArray: INote[] = [];
+    alert('All notes were shared between users on test account. I had disabled backend due to rude notes added by someone. All notes are stored on session, yet if you want to look on the code implementation it is still kept commented');
+    // Here is code to use firebase as backend
+    // Yet due to a fact, that there were backend shared between users
+    // And some notes added by users were rude
+    // I had decided to turn it off
 
-    this.httpMethodsSubscription$ =
-      this.HttpMethodsService.fetchNotesFromBackend()
-        .pipe(
-          map((responeData: { [key: string]: INote }) => {
-            for (const key in responeData) helperArray.push(responeData[key]);
-            return helperArray;
-          })
-        )
-        .subscribe((responseData) => {
-          this.NotesDataService.notes$.next([]);
-          responseData.forEach((element) =>
-            this.NotesDataService.addNewNote(
-              element.id,
-              element.title,
-              element.text
-            )
-          );
-        });
+
+    // const helperArray: INote[] = [];
+    //
+    // this.httpMethodsSubscription$ =
+    //   this.HttpMethodsService.fetchNotesFromBackend()
+    //     .pipe(
+    //       map((responeData: { [key: string]: INote }) => {
+    //         for (const key in responeData) helperArray.push(responeData[key]);
+    //         return helperArray;
+    //       })
+    //     )
+    //     .subscribe((responseData) => {
+    //       this.NotesDataService.notes$.next([]);
+    //       responseData.forEach((element) =>
+    //         this.NotesDataService.addNewNote(
+    //           element.id,
+    //           element.title,
+    //           element.text
+    //         )
+    //       );
+    //     });
   }
 
   ngOnDestroy() {
